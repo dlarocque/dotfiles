@@ -1,2 +1,3 @@
 # dlarocque's dotfiles
-everything that starts with a dot
+Still figuring out how to do this the right way...
+Also haven't done enough configuration to make it worth the effort (:
