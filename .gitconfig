@@ -1,0 +1,7 @@
+[core]
+	excludesfile = /Users/daniellarocque/.gitignore
+[credential]
+	helper = store
+[user]
+	name = dlarocque
+	email = daniellrq@outlook.com
