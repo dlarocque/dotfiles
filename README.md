@@ -1,3 +1,3 @@
 # dlarocque's dotfiles
-Still figuring out how to do this the right way...
-Also haven't done enough configuration to make it worth the effort (: (other than my vimrc)
+
+Not an optimal dotfiles repo, just dumping the ones I need
