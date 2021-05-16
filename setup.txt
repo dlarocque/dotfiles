@@ -1,0 +1,40 @@
+             ...-:::::-...                 dan@danPC
+          .-MMMMMMMMMMMMMMM-.              ---------
+      .-MMMM`..-:::::::-..`MMMM-.          OS: Linux Mint 20.1 x86_64
+    .:MMMM.:MMMMMMMMMMMMMMM:.MMMM:.        Kernel: 5.4.0-73-generic
+   -MMM-M---MMMMMMMMMMMMMMMMMMM.MMM-       Uptime: 2 hours, 50 mins
+ `:MMM:MM`  :MMMM:....::-...-MMMM:MMM:`    Packages: 2177 (dpkg), 26 (brew), 7 (flatpak)
+ :MMM:MMM`  :MM:`  ``    ``  `:MMM:MMM:    Shell: zsh 5.8
+.MMM.MMMM`  :MM.  -MM.  .MM-  `MMMM.MMM.   Resolution: 1920x1080, 1920x1080
+:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:   DE: Cinnamon
+:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM:MMM:   WM: Mutter (Muffin)
+:MMM:MMMM`  :MM.  -MM-  .MM:  `MMMM-MMM:   WM Theme: Mint-Y-Dark-Orange (Mint-Y-Dark)
+.MMM.MMMM`  :MM:--:MM:--:MM:  `MMMM.MMM.   Theme: Mint-Y-Dark-Orange [GTK2/3]
+ :MMM:MMM-  `-MMMMMMMMMMMM-`  -MMM-MMM:    Icons: Mint-Y-Dark-Orange [GTK2/3]
+  :MMM:MMM:`                `:MMM:MMM:     Terminal: terminator
+   .MMM.MMMM:--------------:MMMM.MMM.      CPU: AMD Ryzen 5 2600 (12) @ 3.400GHz
+     '-MMMM.-MMMMMMMMMMMMMMM-.MMMM-'       GPU: NVIDIA GeForce GTX 1660 Ti
+       '.-MMMM``--:::::--``MMMM-.'         Memory: 3289MiB / 16002MiB
+            '-MMMMMMMMMMMMM-'
+               ``-:::::-``
+
+
+Version control : git
+Text Editor: Vim
+vimrc : www.github.com/amix/vimrc
+IDE: VSCode
+
+Terminal
+---------
+Terminal emulator: Terminator
+Shell: zsh (ohmyzsh)
+Plugins: zsh-syntax-highlighting, zsh-completions, zsh-auto-complete
+
+
+Customization
+-------------
+Tile manager: gTile
+Cinnamon Maximum
+Transparent panels
+
+
