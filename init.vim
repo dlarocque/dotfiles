@@ -12,33 +12,23 @@ set background=dark
 colorscheme codedark
 
 set relativenumber 
-
 set showmatch    " show matching brackets
-
 set mouse=v      " middle click paste
 set hlsearch   
-
 set fileencoding=utf-8
 set showbreak=↪
-
 set visualbell noerrorbells
 set history=500
-
-" Persistent undo even after you close a file and re-open it
+set undofile               " persistent undo
 set undofile
-
-" TABS
-set expandtab    " spaces are better than tabs
-set shiftwidth=4 " 4 spaces per auto indent
+set expandtab               " spaces are better than tabs
+set shiftwidth=4            " 4 spaces per auto indent
 set autoindent
 set tabstop=4
 set softtabstop=4
-
 set mouse=a
 set clipboard=unnamedplus
-
 set noswapfile
-
 filetype plugin on
 
 " nerd commenter configs
@@ -53,7 +43,7 @@ xnoremap ; :
 nnoremap H 0
 xnoremap H 0
 nnoremap L $
-xnoremap L 0
+xnoremap L $
 
 " Find and replace
 nnoremap <C-H> :%s/
