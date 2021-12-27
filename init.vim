@@ -1,9 +1,11 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'preservim/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-Plug 'tomasiser/vim-code-dark'
+Plug 'preservim/nerdcommenter'             " better commenting
+Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
+Plug 'tomasiser/vim-code-dark'             " vscode theme
+Plug 'morhetz/gruvbox'                     " cozy
 call plug#end()
 
+" better colors
 if has('termguicolors')
     set termguicolors
 endif
@@ -11,28 +13,26 @@ endif
 set background=dark
 colorscheme codedark
 
-set relativenumber 
-set showmatch    " show matching brackets
-set mouse=v      " middle click paste
-set hlsearch   
+set relativenumber                          " relative line numbers
+set showmatch                               " highlight matching brackets
+set hlsearch                                " highlight search results
 set fileencoding=utf-8
-set showbreak=↪
-set visualbell noerrorbells
-set history=500
-set undofile               " persistent undo
-set undofile
-set expandtab               " spaces are better than tabs
-set shiftwidth=4            " 4 spaces per auto indent
-set autoindent
-set tabstop=4
+set showbreak=↪                             " symbol to show wrapped lines
+set visualbell noerrorbells                 " annoying bells
+set history=500                             " undo history
+set undofile                                " persistent undo
+set expandtab                               " spaces are better than tabs
+set shiftwidth=4                            " 4 spaces per auto indent
+set autoindent                              " auto indent blocks
+set tabstop=4                               
 set softtabstop=4
-set mouse=a
-set clipboard=unnamedplus
-set noswapfile
+set mouse=a                                 " mouse clicking
+set clipboard=unnamedplus                   " copy paste from clipboard
+set noswapfile                              " no useless swap files
 filetype plugin on
 
 " nerd commenter configs
-let g:NERDSpaceDelims=1
+let g:NERDSpaceDelims=1                     " space between comments and text
 let g:CompactSexyComs=1
 
 " MAPPINGS
