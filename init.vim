@@ -4,6 +4,7 @@ Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
 Plug 'vim-airline/vim-airline'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " better colors
@@ -49,6 +50,9 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
+
+" vim-fugitive
+nnoremap <leader>g :G<CR>                   " git status
 
 " MAPPINGS
 let mapleader = ' '
