@@ -46,10 +46,6 @@ let g:netrw_browse_split=4                  " open new files in a new buffer in 
 let g:NERDSpaceDelims=1                     " space between comments and text
 let g:CompactSexyComs=1
 
-" NERDTree
-nnoremap <C-N> :NERDTreeToggle<CR>
-let NERDTreeMinimalUI=1
-
 " MAPPINGS
 let mapleader = ' '
 nnoremap ; :
