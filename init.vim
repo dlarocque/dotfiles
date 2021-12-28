@@ -3,6 +3,7 @@ Plug 'preservim/nerdcommenter'             " better commenting
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
+Plug 'vim-airline/vim-airline'
 call plug#end()
 
 " better colors
@@ -14,6 +15,9 @@ set background=dark
 colorscheme codedark
 
 set relativenumber                          " relative line numbers
+set nu                                      " show the actual line number
+set hidden
+set nowrap                                  " no wrapping
 set showmatch                               " highlight matching brackets
 set hlsearch                                " highlight search results
 set fileencoding=utf-8
@@ -29,14 +33,25 @@ set softtabstop=4
 set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
+set scrolloff=8                             " dont go all the way down before scrolling
+set signcolumn=yes                          " show the sign column on the lhs
 filetype plugin on
 
-" nerd commenter configs
+" netrw
+let g:netrw_liststyle=3                     " tree view
+let g:netrw_banner=0                        " no stupid banner
+let g:netrw_browse_split=4                  " open new files in a new buffer in the previous window
+
+" nerdcommenter configs
 let g:NERDSpaceDelims=1                     " space between comments and text
 let g:CompactSexyComs=1
 
+" NERDTree
+nnoremap <C-N> :NERDTreeToggle<CR>
+let NERDTreeMinimalUI=1
+
 " MAPPINGS
-let mapleader = ','
+let mapleader = ' '
 nnoremap ; :
 xnoremap ; :
 
@@ -45,9 +60,16 @@ xnoremap H 0
 nnoremap L $
 xnoremap L $
 
+" window management
+nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
+
 " Find and replace
 nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
+
+" NERDTree
+nnoremap <C-N> NERDTreeToggle<CR>
+
 
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''
