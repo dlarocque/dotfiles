@@ -1,10 +1,10 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'preservim/nerdcommenter'             " better commenting
-Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
+" Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
-Plug 'vim-airline/vim-airline'
-Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'             " better status/tabline
+Plug 'tpope/vim-fugitive'                  " git integration
 call plug#end()
 
 " better colors
@@ -35,7 +35,7 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-set signcolumn=yes                          " show the sign column on the lhs
+" set signcolumn=yes                          " show the sign column on the lhs
 filetype plugin on
 
 " netrw
@@ -52,7 +52,7 @@ let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
 
 " vim-fugitive
-nnoremap <leader>g :G<CR>                   " git status
+nnoremap <leader>gs :G<CR>                   " git status
 
 " MAPPINGS
 let mapleader = ' '
