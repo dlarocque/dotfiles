@@ -40,11 +40,15 @@ filetype plugin on
 " netrw
 let g:netrw_liststyle=3                     " tree view
 let g:netrw_banner=0                        " no stupid banner
-let g:netrw_browse_split=4                  " open new files in a new buffer in the previous window
+let g:netrw_browse_split=0                  " open new files in a new buffer in the previous window
 
 " nerdcommenter configs
 let g:NERDSpaceDelims=1                     " space between comments and text
 let g:CompactSexyComs=1
+
+" vim-airline
+let g:airline#extensions#tabline#formatter = 'default'
+let g:airline#extensions#tabline#enabled = 1
 
 " MAPPINGS
 let mapleader = ' '
@@ -57,7 +61,14 @@ nnoremap L $
 xnoremap L $
 
 " window management
-nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
+" nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
+nnoremap <leader>t :Ex<CR> " open file tree
+
+nnoremap<leader>rc :e $MYVIMRC<CR>
+
+" quick source
+nnoremap <leader><CR> :w<bar>:so %<CR> " save and source
+
 
 " Find and replace
 nnoremap <C-H> :%s/
