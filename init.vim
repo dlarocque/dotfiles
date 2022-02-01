@@ -5,7 +5,8 @@ Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
-Plug 'zhou13/vim-easyescape'
+Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
+Plug 'fatih/vim-go'
 call plug#end()
 
 " better colors
@@ -14,7 +15,7 @@ call plug#end()
 " endif
 
 set background=dark
-colorscheme default
+colorscheme codedark
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -97,6 +98,9 @@ endif
 " Keep cursor position after yanking
 nnoremap y myy
 xnoremap y myy
+
+" maintain cursor position
+autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
 " OPTIONS
 " Ignore certain files and folders when globing
