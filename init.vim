@@ -5,15 +5,16 @@ Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
+Plug 'zhou13/vim-easyescape'
 call plug#end()
 
 " better colors
-if has('termguicolors')
-    set termguicolors
-endif
+" if has('termguicolors')
+    " set termguicolors
+" endif
 
 set background=dark
-colorscheme codedark
+colorscheme default
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -53,6 +54,12 @@ let g:airline#extensions#tabline#enabled = 1
 
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
+
+" vim-easyescape
+let g:easyescape_chars = { "j": 1, "k": 1 }
+let g:easyescape_timeout = 100
+cnoremap jk <ESC>
+cnoremap kj <ESC>
 
 " MAPPINGS
 let mapleader = ' '
