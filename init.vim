@@ -1,21 +1,25 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'preservim/nerdcommenter'             " better commenting
-" Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
+Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go'                        " vim go tools, i love this
+Plug 'altercation/vim-colors-solarized'    " solarized color theme that doesn't work 
+Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
+Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
 call plug#end()
 
 " better colors
-" if has('termguicolors')
-    " set termguicolors
-" endif
+if has('termguicolors')
+    set termguicolors
+endif
 
+syntax enable
 set background=dark
-colorscheme codedark
+colorscheme solarized8
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -52,6 +56,8 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
+let g:airline_theme="base16_solarized_dark"
+
 
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
