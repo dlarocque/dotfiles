@@ -66,7 +66,7 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme="base16_solarized_dark"
+let g:airline_theme="base16_solarized_dark"
 
 
 " vim-fugitive
