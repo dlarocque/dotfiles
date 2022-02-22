@@ -6,11 +6,21 @@ Plug 'morhetz/gruvbox'                     " cozy
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-Plug 'fatih/vim-go'                        " vim go tools, i love this
+" Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'altercation/vim-colors-solarized'    " solarized color theme that doesn't work 
 Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
 Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
+Plug 'neovim/nvim-lspconfig'               " language server protocol!
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'                    " language server protocol!
+Plug 'L3MON4D3/LuaSnip'
+Plug 'saadparwaiz1/cmp_luasnip'
 call plug#end()
+
+lua require("dlarocque")
 
 " better colors
 if has('termguicolors')
@@ -18,7 +28,7 @@ if has('termguicolors')
 endif
 
 syntax enable
-set background=dark
+set background=light
 colorscheme solarized8
 
 set relativenumber                          " relative line numbers
@@ -41,7 +51,7 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-" set signcolumn=yes                          " show the sign column on the lhs
+set signcolumn=yes                          " show the sign column on the lhs
 filetype plugin on
 
 " netrw
@@ -56,7 +66,7 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme="base16_solarized_dark"
+" let g:airline_theme="base16_solarized_dark"
 
 
 " vim-fugitive
@@ -107,6 +117,10 @@ xnoremap y myy
 
 " maintain cursor position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
+
+" gopls and vim-go
+" let g:go_def_mode='gopls'
+" let g:go_info_mode='gopls'
 
 " OPTIONS
 " Ignore certain files and folders when globing
