@@ -1,13 +1,17 @@
 # dotfiles
-Everything that starts with a dot
 
-This repo just contains my configuration for neovim and zsh
+Quick and easy dotfiles, managed by GNU Stow
+
+## Prerequisites
+- GNU Stow >= 2.3.1
+- Neovim >= 0.6.1
+
 
 ## Install
 
+Clone dotfiles in `.dotfiles` in the home directory.
+```zsh
+$ git clone https://github.com/dlarocque/dotfiles ~/.dotfiles
 ```
-git clone https://github.com/dlarocque/dotfiles ~/dotfiles
-cd ~/dotfiles
-source ./install.sh
-```
-Then install all of the neovim plugins needed with `PlugInstall` in neovim.
+
+
