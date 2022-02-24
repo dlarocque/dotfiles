@@ -14,4 +14,13 @@ Clone dotfiles in `.dotfiles` in the home directory.
 $ git clone https://github.com/dlarocque/dotfiles ~/.dotfiles
 ```
 
+Install Neovim config
+```zsh
+$ stow nvim
+```
+
+Install zsh config
+```zsh
+$ stow zsh
+```
 
