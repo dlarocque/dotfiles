@@ -3,6 +3,8 @@ Plug 'preservim/nerdcommenter'             " better commenting
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
+Plug 'sonph/onehalf', {'rtp': 'vim/'}
+Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
@@ -18,9 +20,11 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'                    " language server protocol!
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 call plug#end()
 
 lua require("dlarocque")
+lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
 if has('termguicolors')
@@ -28,8 +32,8 @@ if has('termguicolors')
 endif
 
 syntax enable
-set background=light
-colorscheme solarized8
+set background=dark
+colorscheme solarized8_flat
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -66,7 +70,7 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-let g:airline_theme="base16_solarized_dark"
+" let g:airline_theme="base16_solarized_dark"
 
 
 " vim-fugitive
