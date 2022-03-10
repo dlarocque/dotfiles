@@ -8,7 +8,7 @@ Plug 'tomasr/molokai'
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-" Plug 'fatih/vim-go'                        " vim go tools, i love this
+Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'altercation/vim-colors-solarized'    " solarized color theme that doesn't work 
 Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
 Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
@@ -33,7 +33,7 @@ endif
 
 syntax enable
 set background=dark
-colorscheme solarized8_flat
+colorscheme codedark
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
