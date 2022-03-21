@@ -12,9 +12,8 @@ export ZSH="/home/dan/.oh-my-zsh"
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="macovsky"
-# macovsky
-# clean
+# local return_code="%(?..%{$fg[red]%}%? ↵%{$reset_color%})"
+# ZSH_THEME="macovsky"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -85,7 +84,12 @@ source $ZSH/oh-my-zsh.sh
 # $ %b'
 # RPROMPT="${return_code}"
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[yellow]%}‹"
+
+PROMPT='%B%F{green}%n@%m%f:%F{blue}%~%f $(git_prompt_info)%{$reset_color%}%B$%b '
+# PROMPT='%{$fg[green]%}%~%{$reset_color%} $(git_prompt_info)%{$reset_color%}%B$%b '
+RPROMPT="${return_code}"
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[blue]%}‹"
 ZSH_THEME_GIT_PROMPT_SUFFIX="› %{$reset_color%}"
 
 # export MANPATH="/usr/local/man:$MANPATH"
