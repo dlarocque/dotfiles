@@ -1,10 +1,34 @@
 [global_config]
   focus = system
-  title_transmit_bg_color = "#241f31"
+  scroll_tabbar = True
+  homogeneous_tabbar = False
+  title_hide_sizetext = True
+  title_transmit_bg_color = "#f800ff"
+  title_receive_fg_color = "#1a1a1a"
+  inactive_color_offset = 1.0
+  always_split_with_profile = True
+  title_use_system_font = False
+  title_font = Monospace 11
 [keybindings]
+  go_left = <Primary>Left
+  go_right = <Primary>Right
+  switch_to_tab_1 = <Ctrl>1
+  switch_to_tab_2 = <Ctrl>2
+  switch_to_tab_3 = <Ctrl>3
+  switch_to_tab_4 = <Ctrl>4
+  switch_to_tab_5 = <Ctrl>5
+  switch_to_tab_6 = <Ctrl>6
+  switch_to_tab_7 = <Ctrl>7
+  switch_to_tab_8 = <Ctrl>8
+  switch_to_tab_9 = <Ctrl>9
+  switch_to_tab_10 = <Ctrl>10
 [profiles]
   [[default]]
+    background_color = "#300a24"
     cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
+    scrollbar_position = hidden
+    bold_is_bright = True
   [[solarized-dark]]
     background_color = "#002b36"
     cursor_color = "#eee8d5"
@@ -17,6 +41,18 @@
     foreground_color = "#839496"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
     use_system_font = False
+  [[black]]
+    background_color = "#1a1a1a"
+    cursor_color = "#aaaaaa"
+    foreground_color = "#ffffff"
+    bold_is_bright = True
+  [[veryblack]]
+    cursor_color = "#aaaaaa"
+    font = DejaVu Sans Mono 11
+    foreground_color = "#ffffff"
+    palette = "#000000:#cd0000:#00cd00:#cdcd00:#0000ee:#cd00cd:#00cdcd:#e5e5e5:#7f7f7f:#ff0000:#00ff00:#ffff00:#5c5cff:#ff00ff:#00ffff:#ffffff"
+    use_system_font = False
+    bold_is_bright = True
 [layouts]
   [[default]]
     [[[child0]]]
@@ -34,6 +70,6 @@
       type = Terminal
       parent = child0
       order = 0
-      profile = solarized-light
+      profile = black
       uuid = a4620b6c-cf5e-443c-804b-50bd69634def
 [plugins]
