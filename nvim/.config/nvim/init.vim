@@ -135,3 +135,6 @@ set wildignore+=*.pyc,*.pkl
 set wildignore+=*.DS_Store
 set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
 set wildignorecase  " ignore file and dir name cases in cmd-completionf
+
+" MISC
+au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
