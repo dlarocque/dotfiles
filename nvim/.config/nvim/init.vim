@@ -5,6 +5,9 @@ Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
 Plug 'sonph/onehalf', {'rtp': 'vim/'}
 Plug 'tomasr/molokai'
+Plug 'joshdick/onedark.vim'
+Plug 'gosukiwi/vim-atom-dark'
+Plug 'sickill/vim-monokai'
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
