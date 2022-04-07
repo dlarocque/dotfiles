@@ -70,6 +70,6 @@
       type = Terminal
       parent = child0
       order = 0
-      profile = black
+      profile = gruvbox dark
       uuid = a4620b6c-cf5e-443c-804b-50bd69634def
 [plugins]

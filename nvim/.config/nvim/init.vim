@@ -36,7 +36,7 @@ endif
 
 syntax enable
 set background=dark
-colorscheme codedark
+colorscheme gruvbox
 
 set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -59,6 +59,10 @@ set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 set signcolumn=yes                          " show the sign column on the lhs
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 filetype plugin on
 
 " netrw
@@ -104,6 +108,8 @@ nnoremap<leader>rc :e $MYVIMRC<CR>
 " quick source
 nnoremap <leader><CR> :w<bar>:so %<CR> " save and source
 
+nnoremap <Left> :bp<CR>
+nnoremap <Right> :bn<CR>
 
 " Find and replace
 nnoremap <C-H> :%s/
@@ -117,6 +123,12 @@ nnoremap <C-N> NERDTreeToggle<CR>
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :<C-U>nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
+
+" Restore cursor shape to beam on exit
+augroup restore_cursor_shape
+  autocmd!
+  au VimLeave * set guicursor=a:ver10-blinkoff0
+augroup END
 
 " Keep cursor position after yanking
 nnoremap y myy
