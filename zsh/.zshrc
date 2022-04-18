@@ -1,12 +1,12 @@
 # If you come from bash you might have to change your $PATH.
 # TODO: This sucks and I am a bad person for it
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-export PATH=$PATH:/usr/local/go/bin
-export PATH=$PATH:$HOME/go/bin
-export PATH=$PATH:$HOME/.local/bin
+# export PATH=$PATH:/usr/local/go/bin
+# export PATH=$PATH:$HOME/go/bin
+# export PATH=$PATH:$HOME/.local/bin
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/dan/.oh-my-zsh"
+export ZSH="/Users/dlarocque/.oh-my-zsh"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -121,5 +121,7 @@ alias gc="git commit"
 alias gd="git diff"
 alias gpm="git push origin master"
 
-CUSTOM_NVIM_PATH=/usr/bin/nvim.appimage
-sudo update-alternatives --install /usr/bin/vi vi "${CUSTOM_NVIM_PATH}" 110
+alias vi="nvim"
+
+# CUSTOM_NVIM_PATH=/usr/bin/nvim.appimage
+# sudo update-alternatives --install /usr/bin/vi vi "${CUSTOM_NVIM_PATH}" 110
