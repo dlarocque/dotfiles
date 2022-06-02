@@ -1,0 +1,9 @@
+[core]
+	excludesfile = /Users/dlarocque/.gitignore_global
+[credential]
+	helper = store
+[user]
+	name = dlarocque
+	email = daniellrq@outlook.com
+[code]
+	editor = nvim
