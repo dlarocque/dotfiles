@@ -1,29 +1,36 @@
 call plug#begin('~/.config/nvim/plugged')
+" General
 Plug 'preservim/nerdcommenter'             " better commenting
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
-Plug 'tomasiser/vim-code-dark'             " vscode theme
-Plug 'morhetz/gruvbox'                     " cozy
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'tomasr/molokai'
-Plug 'joshdick/onedark.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'sickill/vim-monokai'
-Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
 Plug 'fatih/vim-go'                        " vim go tools, i love this
-Plug 'altercation/vim-colors-solarized'    " solarized color theme that doesn't work 
-Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
-Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
-Plug 'neovim/nvim-lspconfig'               " language server protocol!
+Plug 'vim-airline/vim-airline'             " better status/tabline
+Plug 'lervag/vimtex'                       " LaTeX support in vim
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'                    " fuzzy finder mmmm 
+Plug 'airblade/vim-rooter'                 " fuzzy finding in base directory with .git
+
+" Completion, Syntax highlighting
+Plug 'neovim/nvim-lspconfig'               
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'                    " language server protocol!
+Plug 'hrsh7th/nvim-cmp'                   
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Color Schemes
+Plug 'tomasiser/vim-code-dark'           
+Plug 'morhetz/gruvbox'                  
+Plug 'joshdick/onedark.vim'
+Plug 'lifepillar/vim-gruvbox8'
+Plug 'arcticicestudio/nord-vim'
+Plug 'sickill/vim-monokai'
+Plug 'lifepillar/vim-solarized8'        
+Plug 'vim-airline/vim-airline-themes'  
 call plug#end()
 
 lua require("dlarocque")
@@ -36,9 +43,9 @@ endif
 
 syntax enable
 set background=dark
-colorscheme gruvbox
+colorscheme codedark
 
-set relativenumber                          " relative line numbers
+" set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
 set hidden
 set nowrap                                  " no wrapping
@@ -77,11 +84,15 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme="base16_solarized_dark"
+" let g:airline_theme="gru"
 
+" vimtex
+let g:vimtex_view_method = 'zathura' " use zathura as pdf viewer
+" nnoremap <leader>v <plug>(vimtex-view)
 
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
+
 
 " vim-easyescape
 let g:easyescape_chars = { "j": 1, "k": 1 }
@@ -125,10 +136,10 @@ if maparg('<C-L>', 'n') ==# ''
 endif
 
 " Restore cursor shape to beam on exit
-augroup restore_cursor_shape
-  autocmd!
-  au VimLeave * set guicursor=a:ver10-blinkoff0
-augroup END
+" augroup restore_cursor_shape
+"   autocmd!
+"   au VimLeave * set guicursor=a:ver10-blinkoff0
+" augroup END
 
 " Keep cursor position after yanking
 nnoremap y myy

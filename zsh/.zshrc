@@ -120,6 +120,10 @@ alias ga="git add ."
 alias gc="git commit"
 alias gd="git diff"
 alias gpm="git push origin master"
+LC_REPO_DIR="$HOME/code/cp"
+alias lcup="cd $LC_REPO_DIR && git add . && git commit -m \"$(date +%m-%d-%y)\""
+
+source /usr/share/doc/fzf/examples/key-bindings.zsh
 
 CUSTOM_NVIM_PATH=/usr/bin/nvim.appimage
 sudo update-alternatives --install /usr/bin/vi vi "${CUSTOM_NVIM_PATH}" 110
