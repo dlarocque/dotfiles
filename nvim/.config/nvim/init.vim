@@ -6,10 +6,11 @@ Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
 Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'vim-airline/vim-airline'             " better status/tabline
+Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'                       " LaTeX support in vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'                    " fuzzy finder mmmm 
-Plug 'airblade/vim-rooter'                 " fuzzy finding in base directory with .git
+Plug 'junegunn/fzf.vim'
+Plug 'airblade/vim-rooter'
 
 " Completion, Syntax highlighting
 Plug 'neovim/nvim-lspconfig'               
@@ -24,12 +25,15 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Color Schemes
 Plug 'tomasiser/vim-code-dark'           
+Plug 'mswift42/vim-themes'
 Plug 'morhetz/gruvbox'                  
 Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-gruvbox8'
 Plug 'arcticicestudio/nord-vim'
 Plug 'sickill/vim-monokai'
+Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'lifepillar/vim-solarized8'        
+Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'vim-airline/vim-airline-themes'  
 call plug#end()
 
@@ -37,13 +41,13 @@ lua require("dlarocque")
 lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
-if has('termguicolors')
-    set termguicolors
-endif
+" if has('termguicolors')
+"     set termguicolors
+" endif
 
-syntax enable
+syntax on
 set background=dark
-colorscheme codedark
+colorscheme default
 
 " set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -65,7 +69,7 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-set signcolumn=yes                          " show the sign column on the lhs
+" set signcolumn=yes                          " show the sign column on the lhs
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
@@ -84,7 +88,7 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme="gru"
+" let g:airline_theme="base16"
 
 " vimtex
 let g:vimtex_view_method = 'zathura' " use zathura as pdf viewer
