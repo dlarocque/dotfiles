@@ -1,65 +1,9 @@
-call plug#begin('~/.config/nvim/plugged')
-Plug 'preservim/nerdcommenter'             " better commenting
-Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 
-" COLOR SCHEMES
-Plug 'tomasiser/vim-code-dark'             " vscode theme
-Plug 'morhetz/gruvbox'                     " cozy
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'tomasr/molokai'
-Plug 'joshdick/onedark.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'doums/darcula'
-Plug 'sickill/vim-monokai'
-Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
-Plug 'NLKNguyen/papercolor-theme'
-Plug 'arcticicestudio/nord-vim'
-Plug 'jeffkreeftmeijer/vim-dim'
-Plug 'mswift42/vim-themes'
-
-Plug 'lervag/vimtex'                       " LaTeX support in vim
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'                    " fuzzy finder mmmm 
-Plug 'airblade/vim-rooter'                 " fuzzy finding in base directory with .git
-
-" COMPLETION
-Plug 'neovim/nvim-lspconfig'               " language server protocol!
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'                    " language server protocol!
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-
-Plug 'vim-airline/vim-airline'             " better status/tabline
-Plug 'tpope/vim-fugitive'                  " git integration
-Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-
-" LANGUAGE SPECIFIC
-Plug 'fatih/vim-go'                        " vim go tools, i love this
-Plug 'vim-latex/vim-latex'                 " nice LaTeX features
-
-" MISC
-Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
-Plug 'andweeb/presence.nvim'               " discord presence
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " better syntax highlighting
-call plug#end()
-
-lua require("dlarocque")
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-
-" better colors
-" if has('termguicolors')
-"     set termguicolors
-" endif
-
-syntax on
+syntax enable
 set background=dark
-colorscheme default
+colorscheme default 
 
-" set relativenumber                          " relative line numbers
+set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
 set hidden
 set nowrap                                  " no wrapping
@@ -79,12 +23,14 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-" set signcolumn=yes                          " show the sign column on the lhs
+set signcolumn=yes                          " show the sign column on the lhs
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
 set guicursor+=i:blinkwait10
 filetype plugin on
+
+let g:presence_log_level="debug"
 
 " netrw
 let g:netrw_liststyle=3                     " tree view
@@ -98,7 +44,8 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='silver'
+" let g:airline_theme="base16_solarized_dark"
+
 
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
@@ -143,6 +90,12 @@ nnoremap <C-N> NERDTreeToggle<CR>
 if maparg('<C-L>', 'n') ==# ''
   nnoremap <silent> <C-L> :<C-U>nohlsearch<C-R>=has('diff')?'<Bar>diffupdate':''<CR><CR><C-L>
 endif
+
+" Restore cursor shape to beam on exit
+" augroup restore_cursor_shape
+"  autocmd!
+"  au VimLeave * set guicursor=a:ver10-blinkoff0
+" augroup END
 
 " Keep cursor position after yanking
 nnoremap y myy
