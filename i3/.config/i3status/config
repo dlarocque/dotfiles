@@ -1,0 +1,45 @@
+general {
+  colors = true
+  color_good = "#a3be8c"
+  color_bad  = "#bf616a"
+  color_degraded = "#ebcb8b"
+  interval = 1
+  separator = "|"
+}
+
+order += "disk /"
+order += "ethernet"
+order += "cpu_usage"
+order += "battery all"
+order += "load"
+order += "tztime local"
+
+ethernet eth0 {
+  format_up = "ETH: %ip (%speed)"
+  format_down = "ETH: down"
+}
+
+cpu_usage {
+  format = "Cpu: %usage"
+}
+
+battery all {
+        format = "%status %percentage %remaining"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M:%S"
+}
+
+load {
+        format = "%1min"
+}
+
+disk "/" {
+        format = "%avail"
+}
+
+memory {
+  memory_used_method = classical
+  format="Memory: %used/%total"
+}
