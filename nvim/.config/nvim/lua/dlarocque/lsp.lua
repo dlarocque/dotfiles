@@ -41,6 +41,12 @@ cmp.setup.filetype('gitcommit', {
   })
 })
 
+cmp.setup.filetype({'markdown', 'txt'}, {
+    completion = {
+        autocomplete = false
+    }
+})
+
 -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
 cmp.setup.cmdline('/', {
   sources = {

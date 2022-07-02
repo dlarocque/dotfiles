@@ -1,8 +1,8 @@
 call plug#begin('~/.config/nvim/plugged')
 " General
-Plug 'preservim/nerdcommenter'             " better commenting
+" Plug 'preservim/nerdcommenter'             " better commenting
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
-Plug 'tpope/vim-fugitive'                  " git integration
+" Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
 Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'vim-airline/vim-airline'             " better status/tabline
@@ -13,32 +13,34 @@ Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
 
 " Completion, Syntax highlighting
-Plug 'neovim/nvim-lspconfig'               
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'                   
-Plug 'L3MON4D3/LuaSnip'
-Plug 'saadparwaiz1/cmp_luasnip'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'neovim/nvim-lspconfig'               
+" Plug 'hrsh7th/cmp-nvim-lsp'
+" Plug 'hrsh7th/cmp-buffer'
+" Plug 'hrsh7th/cmp-path'
+" Plug 'hrsh7th/cmp-cmdline'
+" Plug 'hrsh7th/nvim-cmp'                   
+" Plug 'L3MON4D3/LuaSnip'
+" Plug 'saadparwaiz1/cmp_luasnip'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Color Schemes
 Plug 'tomasiser/vim-code-dark'           
-Plug 'mswift42/vim-themes'
+" Plug 'mswift42/vim-themes'
 Plug 'morhetz/gruvbox'                  
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 Plug 'lifepillar/vim-gruvbox8'
+Plug 'w0ng/vim-hybrid'
 Plug 'arcticicestudio/nord-vim'
-Plug 'sickill/vim-monokai'
+" Plug 'sickill/vim-monokai'
 Plug 'ErichDonGubler/vim-sublime-monokai'
-Plug 'lifepillar/vim-solarized8'        
-Plug 'jeffkreeftmeijer/vim-dim'
+" Plug 'lifepillar/vim-solarized8'        
+" Plug 'jeffkreeftmeijer/vim-dim'
+Plug 'doums/darcula'
 Plug 'vim-airline/vim-airline-themes'  
 call plug#end()
 
-lua require("dlarocque")
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+" lua require("dlarocque")
+" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
 " if has('termguicolors')
@@ -47,7 +49,7 @@ lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incr
 
 syntax on
 set background=dark
-colorscheme default
+" colorscheme hybrid
 
 " set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
