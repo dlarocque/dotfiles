@@ -26,16 +26,16 @@ Plug 'airblade/vim-rooter'
 " Color Schemes
 Plug 'tomasiser/vim-code-dark'           
 " Plug 'mswift42/vim-themes'
-Plug 'morhetz/gruvbox'                  
+" Plug 'morhetz/gruvbox'                  
 " Plug 'joshdick/onedark.vim'
-Plug 'lifepillar/vim-gruvbox8'
-Plug 'w0ng/vim-hybrid'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'lifepillar/vim-gruvbox8'
+" Plug 'w0ng/vim-hybrid'
+" Plug 'arcticicestudio/nord-vim'
 " Plug 'sickill/vim-monokai'
-Plug 'ErichDonGubler/vim-sublime-monokai'
+" Plug 'ErichDonGubler/vim-sublime-monokai'
 " Plug 'lifepillar/vim-solarized8'        
 " Plug 'jeffkreeftmeijer/vim-dim'
-Plug 'doums/darcula'
+" Plug 'doums/darcula'
 Plug 'vim-airline/vim-airline-themes'  
 call plug#end()
 
@@ -43,13 +43,13 @@ call plug#end()
 " lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
-" if has('termguicolors')
-"     set termguicolors
-" endif
+if has('termguicolors')
+    set termguicolors
+endif
 
 syntax on
 set background=dark
-" colorscheme hybrid
+colorscheme codedark
 
 " set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
