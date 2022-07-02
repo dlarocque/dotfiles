@@ -1,0 +1,14 @@
+[core]
+    excludesfile = /home/dlarocque/.gitignore_global
+[credential]
+    helper = store
+	helper = 
+	helper = /home/dlarocque/tools/gcm/git-credential-manager-core
+	credentialStore = cache
+[user]
+    name = dlarocque
+    email = daniellrq@outlook.com
+[code]
+    editor = vi
+[credential "https://dev.azure.com"]
+	useHttpPath = true
