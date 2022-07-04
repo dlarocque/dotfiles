@@ -135,6 +135,9 @@ xnoremap <C-H> :s/
 " NERDTree
 nnoremap <C-N> NERDTreeToggle<CR>
 
+" File search
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<CR>
 
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''
