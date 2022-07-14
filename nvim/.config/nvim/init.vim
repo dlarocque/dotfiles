@@ -1,22 +1,26 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'preservim/nerdcommenter'             " better commenting
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
+Plug 'vimwiki/vimwiki'
 
 " COLOR SCHEMES
 Plug 'tomasiser/vim-code-dark'             " vscode theme
 Plug 'morhetz/gruvbox'                     " cozy
-Plug 'sonph/onehalf', {'rtp': 'vim/'}
-Plug 'tomasr/molokai'
-Plug 'joshdick/onedark.vim'
-Plug 'gosukiwi/vim-atom-dark'
-Plug 'doums/darcula'
-Plug 'sickill/vim-monokai'
+" Plug 'sonph/onehalf', {'rtp': 'vim/'}
+" Plug 'tomasr/molokai'
+" Plug 'joshdick/onedark.vim'
+" Plug 'gosukiwi/vim-atom-dark'
+" Plug 'doums/darcula'
+" Plug 'sickill/vim-monokai'
 Plug 'ErichDonGubler/vim-sublime-monokai'
 Plug 'lifepillar/vim-solarized8'           " solarized color theme that actually works
+Plug 'nelstrom/vim-mac-classic-theme'
 Plug 'NLKNguyen/papercolor-theme'
-Plug 'arcticicestudio/nord-vim'
-Plug 'jeffkreeftmeijer/vim-dim'
+" Plug 'arcticicestudio/nord-vim'
+" Plug 'jeffkreeftmeijer/vim-dim'
 Plug 'mswift42/vim-themes'
+
+Plug 'preservim/nerdtree'
 
 Plug 'lervag/vimtex'                       " LaTeX support in vim
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -33,9 +37,14 @@ Plug 'hrsh7th/nvim-cmp'                    " language server protocol!
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
+Plug 'nvim-lua/plenary.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+
 Plug 'vim-airline/vim-airline'             " better status/tabline
-Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
+
+Plug 'ryanoasis/vim-devicons'
+Plug 'folke/trouble.nvim'
 
 " LANGUAGE SPECIFIC
 Plug 'fatih/vim-go'                        " vim go tools, i love this
@@ -43,21 +52,19 @@ Plug 'vim-latex/vim-latex'                 " nice LaTeX features
 
 " MISC
 Plug 'vim-airline/vim-airline-themes'      " themes for vim-airline status bar
-Plug 'andweeb/presence.nvim'               " discord presence
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " better syntax highlighting
 call plug#end()
 
 lua require("dlarocque")
-lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
-" if has('termguicolors')
-"     set termguicolors
-" endif
+if has('termguicolors')
+   set termguicolors
+endif
 
-syntax on
+syntax enable
 set background=dark
-colorscheme default
+colorscheme gruvbox
 
 " set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -66,6 +73,7 @@ set nowrap                                  " no wrapping
 set showmatch                               " highlight matching brackets
 set hlsearch                                " highlight search results
 set fileencoding=utf-8
+set encoding=UTF-8
 set showbreak=↪                             " symbol to show wrapped lines
 set visualbell noerrorbells                 " annoying bells
 set history=500                             " undo history
@@ -79,7 +87,7 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-" set signcolumn=yes                          " show the sign column on the lhs
+set signcolumn=yes                          " show the sign column on the lhs
 set guicursor=n-v-c:block-Cursor
 set guicursor+=i:ver100-iCursor
 set guicursor+=n-v-c:blinkon0
@@ -98,7 +106,7 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
-"let g:airline_theme='silver'
+let g:airline_theme='minimalist'
 
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
@@ -138,6 +146,9 @@ xnoremap <C-H> :s/
 " NERDTree
 nnoremap <C-N> NERDTreeToggle<CR>
 
+" File search
+nnoremap <leader>f :Files<CR>
+nnoremap <leader>g :Rg<CR>
 
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''
@@ -147,6 +158,9 @@ endif
 " Keep cursor position after yanking
 nnoremap y myy
 xnoremap y myy
+
+" trouble
+nnoremap <leader>e <cmd>TroubleToggle<cr>
 
 " maintain cursor position
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
