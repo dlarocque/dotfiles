@@ -1,5 +1,6 @@
 [core]
     excludesfile = /home/dlarocque/.gitignore_global
+	editor = nvim
 [credential]
     helper = store
 	helper = 

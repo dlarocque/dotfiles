@@ -8,9 +8,14 @@ Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'vimwiki/vimwiki'
 Plug 'lervag/vimtex'                       " LaTeX support in vim
+Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'ryanoasis/vim-devicons'
+Plug 'folke/trouble.nvim'
 
 " Completion, Syntax highlighting
 " Plug 'neovim/nvim-lspconfig'               
@@ -21,26 +26,22 @@ Plug 'airblade/vim-rooter'
 " Plug 'hrsh7th/nvim-cmp'                   
 " Plug 'L3MON4D3/LuaSnip'
 " Plug 'saadparwaiz1/cmp_luasnip'
-" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+" Plug 'nvim-treesitter/nvim-treesitter'
+" Plug 'preservim/nerdtree'
 
 " Color Schemes
 Plug 'tomasiser/vim-code-dark'           
-" Plug 'mswift42/vim-themes'
-" Plug 'morhetz/gruvbox'                  
-" Plug 'joshdick/onedark.vim'
-" Plug 'lifepillar/vim-gruvbox8'
-" Plug 'w0ng/vim-hybrid'
-" Plug 'arcticicestudio/nord-vim'
-" Plug 'sickill/vim-monokai'
-" Plug 'ErichDonGubler/vim-sublime-monokai'
-" Plug 'lifepillar/vim-solarized8'        
-" Plug 'jeffkreeftmeijer/vim-dim'
-" Plug 'doums/darcula'
+Plug 'morhetz/gruvbox'                  
+Plug 'joshdick/onedark.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'arzg/vim-colors-xcode'
+Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline-themes'  
+Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
 " lua require("dlarocque")
-" lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
+"lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
 if has('termguicolors')
@@ -49,7 +50,7 @@ endif
 
 syntax on
 set background=dark
-colorscheme codedark
+colorscheme jellybeans
 
 " set relativenumber                          " relative line numbers
 set nu                                      " show the actual line number
@@ -72,10 +73,11 @@ set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set signcolumn=yes                          " show the sign column on the lhs
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
+set guicursor=i:block
 filetype plugin on
 
 " netrw
@@ -90,10 +92,20 @@ let g:CompactSexyComs=1
 " vim-airline
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
+" let g:airline_theme="base16_darktooth"
 let g:airline_theme="minimalist"
 
 " vimtex
+let g:tex_flavor='latex'
 let g:vimtex_view_method = 'zathura' " use zathura as pdf viewer
+let g:vimtex_quickfix_mode=0
+hi clear Conceal
+
+" vim tex conceal
+set conceallevel=1
+let g:tex_conceal='abdmg'
+hi Conceal ctermbg=none
+
 " nnoremap <leader>v <plug>(vimtex-view)
 
 " vim-fugitive
@@ -118,7 +130,7 @@ xnoremap L $
 
 " window management
 " nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
-nnoremap <leader>t :Ex<CR> " open file tree
+nnoremap <leader>t :Ex<CR>
 
 nnoremap<leader>rc :e $MYVIMRC<CR>
 
@@ -133,11 +145,17 @@ nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
 
 " NERDTree
-nnoremap <C-N> NERDTreeToggle<CR>
+" nnoremap <leader>t <CMD>NERDTreeToggle<CR> 
+" let NERDTreeShowHidden=1
+
+" trouble
+nnoremap <leader>e <CMD>TroubleToggle<CR>
 
 " File search
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>g :Rg<CR>
+
+let g:vimtex_view_method = 'zathura'
 
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''

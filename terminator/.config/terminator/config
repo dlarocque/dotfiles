@@ -40,7 +40,6 @@
     font = Monospace 10
     foreground_color = "#839496"
     palette = "#073642:#dc322f:#859900:#b58900:#268bd2:#d33682:#2aa198:#eee8d5:#002b36:#cb4b16:#586e75:#657b83:#839496:#6c71c4:#93a1a1:#fdf6e3"
-    use_system_font = False
   [[black]]
     background_color = "#1a1a1a"
     cursor_color = "#aaaaaa"
@@ -66,10 +65,39 @@
       title = dan@mx:~
       last_active_term = a4620b6c-cf5e-443c-804b-50bd69634def
       last_active_window = True
+  [[New Layout]]
+    [[[child0]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 0:0
+      maximised = True
+      fullscreen = False
+      size = 1866, 1016
+      title = dlarocque@focus:~/workspace/courses/3430/labs/lab4
+      last_active_term = 4ba7e6d3-5018-4cfe-97fc-70cb5cf86971
+      last_active_window = False
     [[[terminal1]]]
       type = Terminal
       parent = child0
       order = 0
-      profile = gruvbox dark
+      profile = black
+      uuid = 4ba7e6d3-5018-4cfe-97fc-70cb5cf86971
+    [[[child2]]]
+      type = Window
+      parent = ""
+      order = 0
+      position = 26:23
+      maximised = False
+      fullscreen = False
+      size = 942, 1043
+      title = dan@mx:~
+      last_active_term = a4620b6c-cf5e-443c-804b-50bd69634def
+      last_active_window = True
+    [[[terminal3]]]
+      type = Terminal
+      parent = child2
+      order = 0
+      profile = black
       uuid = a4620b6c-cf5e-443c-804b-50bd69634def
 [plugins]
