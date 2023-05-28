@@ -4,27 +4,27 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
 " Plug 'tpope/vim-fugitive'                  " git integration
 Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-Plug 'fatih/vim-go'                        " vim go tools, i love this
+" Plug 'fatih/vim-go'                        " vim go tools, i love this
 Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'vimwiki/vimwiki'
-Plug 'lervag/vimtex'                       " LaTeX support in vim
-Plug 'KeitaNakamura/tex-conceal.vim'
+" Plug 'lervag/vimtex'                       " LaTeX support in vim
+" Plug 'KeitaNakamura/tex-conceal.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'airblade/vim-rooter'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'jose-elias-alvarez/null-ls.nvim'
+" Plug 'nvim-lua/plenary.nvim'
+" Plug 'jose-elias-alvarez/null-ls.nvim'
 " Plug 'ryanoasis/vim-devicons'
 Plug 'folke/trouble.nvim'
 
 " Completion, Syntax highlighting
-" Plug 'neovim/nvim-lspconfig'               
-" Plug 'hrsh7th/cmp-nvim-lsp'
-" Plug 'hrsh7th/cmp-buffer'
-" Plug 'hrsh7th/cmp-path'
-" Plug 'hrsh7th/cmp-cmdline'
-" Plug 'hrsh7th/nvim-cmp'                   
-" Plug 'L3MON4D3/LuaSnip'
+Plug 'neovim/nvim-lspconfig'               
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'                   
+Plug 'L3MON4D3/LuaSnip'
 " Plug 'saadparwaiz1/cmp_luasnip'
 " Plug 'nvim-treesitter/nvim-treesitter'
 " Plug 'preservim/nerdtree'
@@ -32,15 +32,17 @@ Plug 'folke/trouble.nvim'
 " Color Schemes
 Plug 'tomasiser/vim-code-dark'           
 Plug 'morhetz/gruvbox'                  
+Plug 'dlarocque/dark'                  
 Plug 'joshdick/onedark.vim'
 Plug 'w0ng/vim-hybrid'
-Plug 'arzg/vim-colors-xcode'
-Plug 'arcticicestudio/nord-vim'
+Plug 'lifepillar/vim-solarized8'
+" Plug 'arzg/vim-colors-xcode'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'vim-airline/vim-airline-themes'  
-Plug 'nanotech/jellybeans.vim'
+" Plug 'nanotech/jellybeans.vim'
 call plug#end()
 
-" lua require("dlarocque")
+lua require("dlarocque")
 "lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
 
 " better colors
@@ -50,10 +52,10 @@ endif
 
 syntax on
 set background=dark
-colorscheme jellybeans
+colorscheme default
 
 " set relativenumber                          " relative line numbers
-set nu                                      " show the actual line number
+set nonu                                      " show the actual line number
 set hidden
 set nowrap                                  " no wrapping
 set showmatch                               " highlight matching brackets
@@ -72,11 +74,12 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-" set signcolumn=yes                          " show the sign column on the lhs
-" set guicursor=n-v-c:block-Cursor
-" set guicursor+=i:ver100-iCursor
-" set guicursor+=n-v-c:blinkon0
-" set guicursor+=i:blinkwait10
+set colorcolumn=80
+set signcolumn=no                          " show the sign column on the lhs
+set guicursor=n-v-c:block-Cursor
+set guicursor+=i:ver100-iCursor
+set guicursor+=n-v-c:blinkon0
+set guicursor+=i:blinkwait10
 set guicursor=i:block
 filetype plugin on
 
@@ -93,7 +96,7 @@ let g:CompactSexyComs=1
 let g:airline#extensions#tabline#formatter = 'default'
 let g:airline#extensions#tabline#enabled = 1
 " let g:airline_theme="base16_darktooth"
-let g:airline_theme="minimalist"
+let g:airline_theme="monochrome"
 
 " vimtex
 let g:tex_flavor='latex'
