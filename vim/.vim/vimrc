@@ -1,15 +1,14 @@
 call plug#begin()
-Plug 'github/copilot.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'chriskempson/base16-vim'
+Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-commentary'     " Easy commenting/uncommenting
+Plug 'airblade/vim-gitgutter'   " Git change indicators in the gutter
+Plug 'neoclide/coc.nvim', {'branch': 'release'}  " LSP client (coc.nvim)
+Plug 'junegunn/seoul256.vim'
 call plug#end()
 
 syntax on
-set background=dark
-colorscheme base16-classic-dark
-
-set termguicolors
+color seoul256-light
 
 set nonu                                      " show the actual line number
 set hidden
@@ -27,16 +26,22 @@ set autoindent                              " auto indent blocks
 set tabstop=4                               
 set softtabstop=4
 set mouse=a                                 " mouse clicking
-set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
 set signcolumn=no                          " show the sign column on the lhs
+set re=0
+
+if has('mac')
+    set clipboard=unnamed
+else
+    set clipboard=unnamedplus
+endif
 
 filetype plugin on
 
 " Airline theme
-let g:airline_theme='base16'
+" let g:airline_theme='base16'
 
 " netrw
 let g:netrw_liststyle=3                     " tree view

@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/Users/dlarocque/workspace/dlarocque/firebase-js-sdk/.github'
+let g:netrw_dirhist_5='/Users/dlarocque/workspace/dlarocque/firebase-js-sdk/.github/workflows'
+let g:netrw_dirhist_4='/Users/dlarocque/workspace/repro/8222/broken-firebase-web-extension-types/node_modules/@firebase/auth/dist/esm5'
+let g:netrw_dirhist_3='/Users/dlarocque/workspace/repro/8222/broken-firebase-web-extension-types/node_modules/@firebase/auth/dist'
+let g:netrw_dirhist_2='/Users/dlarocque/workspace/repro/8222/broken-firebase-web-extension-types/node_modules/@firebase/auth'
+let g:netrw_dirhist_1='/Users/dlarocque/workspace/firebase/firebase-js-sdk'
+let g:netrw_dirhist_0='/Users/dlarocque/workspace/firebase/firebase-js-sdk/packages/util/src'
+let g:netrw_dirhist_9='/Users/dlarocque/workspace/firebase/firebase-js-sdk/packages/util'
+let g:netrw_dirhist_8='/Users/dlarocque/workspace/firebase/firebase-js-sdk/packages'
+let g:netrw_dirhist_7='/Users/dlarocque/workspace/firebase/firebase-js-sdk'
