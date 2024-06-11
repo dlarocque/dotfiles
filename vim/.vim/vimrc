@@ -2,15 +2,18 @@ call plug#begin()
 Plug 'dense-analysis/ale'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-commentary'     " Easy commenting/uncommenting
-Plug 'airblade/vim-gitgutter'   " Git change indicators in the gutter
+Plug 'tpope/vim-fugitive'   " Git change indicators in the gutter
 Plug 'neoclide/coc.nvim', {'branch': 'release'}  " LSP client (coc.nvim)
 Plug 'junegunn/seoul256.vim'
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
-syntax on
-color seoul256-light
+set termguicolors
 
-set nonu                                      " show the actual line number
+syntax on
+color solarized8_flat
+
+set nu                                      " show the actual line number
 set hidden
 set nowrap                                  " no wrapping
 set showmatch                               " highlight matching brackets
@@ -21,12 +24,11 @@ set visualbell noerrorbells                 " annoying bells
 set history=500                             " undo history
 set undofile                                " persistent undo
 set expandtab                               " spaces are better than tabs
-set shiftwidth=4                            " 4 spaces per auto indent
+set shiftwidth=2                            " 4 spaces per auto indent
 set autoindent                              " auto indent blocks
-set tabstop=4                               
-set softtabstop=4
+set tabstop=2                               
+set softtabstop=2
 set mouse=a                                 " mouse clicking
-set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
 set signcolumn=no                          " show the sign column on the lhs
@@ -39,6 +41,10 @@ else
 endif
 
 filetype plugin on
+
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
 
 " Airline theme
 " let g:airline_theme='base16'
@@ -57,6 +63,8 @@ nnoremap H 0
 xnoremap H 0
 nnoremap L $
 xnoremap L $
+
+nnoremap fr :ALEFindReferences<CR>
 
 " window management
 " nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
