@@ -1,0 +1,41 @@
+live_config_reload = true
+
+[env]
+TERM = "xterm-256color"
+
+[window]
+decorations = "full"
+dynamic_padding = false
+opacity = 0.95
+
+[window.padding]
+x = 25
+y = 20
+
+[font]
+size = 14.0
+
+[font.normal]
+family = "Menlo"
+style = "Regular"
+
+[font.bold]
+family = "Menlo"
+style = "Bold"
+
+[font.italic]
+family = "Menlo"
+style = "Italic"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+# Uncomment to use an alternative clipboard provider like wl-clipboard if available
+#ref: https://github.com/alacritty/alacritty/blob/master/alacritty.yml
+#clipboard:
+#  action: copy
+#  command:
+#    program: wl-copy
+#    args: []
+
