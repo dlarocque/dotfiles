@@ -5,26 +5,20 @@ TERM = "xterm-256color"
 
 [window]
 decorations = "full"
-dynamic_padding = false
-opacity = 0.95
-
-[window.padding]
-x = 25
-y = 20
 
 [font]
-size = 14.0
+size = 10.0
 
 [font.normal]
-family = "Menlo"
+family = "monospace"
 style = "Regular"
 
 [font.bold]
-family = "Menlo"
+family = "monospace"
 style = "Bold"
 
 [font.italic]
-family = "Menlo"
+family = "monospace"
 style = "Italic"
 
 [scrolling]

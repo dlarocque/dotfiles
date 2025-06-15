@@ -108,15 +108,15 @@ bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 
-exec --nostartup-id xrandr --output HDMI-0 --auto --right-of DP-4 
-workspace 1 output "DP-4"
-workspace 2 output "DP-4"
-workspace 3 output "DP-4"
-workspace 4 output "DP-4"
+exec --nostartup-id xrandr --output DP-2 --auto --left-of HDMI-0 
+workspace 1 output "DP-2"
+workspace 2 output "DP-2"
+workspace 3 output "DP-2"
+workspace 4 output "DP-2"
+workspace 5 output "HDMI-0"
 workspace 6 output "HDMI-0"
 workspace 7 output "HDMI-0"
 workspace 8 output "HDMI-0"
-workspace 9 output "HDMI-0"
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
