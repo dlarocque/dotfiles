@@ -1,61 +1,30 @@
 call plug#begin('~/.config/nvim/plugged')
 " General
-" Plug 'preservim/nerdcommenter'             " better commenting
-Plug 'jiangmiao/auto-pairs'                " auto brackets, surrounds
-" Plug 'tpope/vim-fugitive'                  " git integration
-Plug 'zhou13/vim-easyescape'               " no delay when going into cmd mode
-" Plug 'fatih/vim-go'                        " vim go tools, i love this
-Plug 'vim-airline/vim-airline'             " better status/tabline
-Plug 'vimwiki/vimwiki'
-" Plug 'lervag/vimtex'                       " LaTeX support in vim
-" Plug 'KeitaNakamura/tex-conceal.vim'
+Plug 'lewis6991/gitsigns.nvim'
+" Plug 'vim-airline/vim-airline'             " better status/tabline
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'airblade/vim-rooter'
-" Plug 'nvim-lua/plenary.nvim'
-" Plug 'jose-elias-alvarez/null-ls.nvim'
-" Plug 'ryanoasis/vim-devicons'
-Plug 'folke/trouble.nvim'
 
-" Completion, Syntax highlighting
-Plug 'neovim/nvim-lspconfig'               
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'                   
-Plug 'L3MON4D3/LuaSnip'
-" Plug 'saadparwaiz1/cmp_luasnip'
-" Plug 'nvim-treesitter/nvim-treesitter'
-" Plug 'preservim/nerdtree'
+" Languages
+Plug 'fatih/vim-go'
+
+" Snippets
+Plug 'SirVer/ultisnips'
 
 " Color Schemes
-Plug 'tomasiser/vim-code-dark'           
-Plug 'morhetz/gruvbox'                  
-Plug 'dlarocque/dark'                  
-Plug 'joshdick/onedark.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'lifepillar/vim-solarized8'
-" Plug 'arzg/vim-colors-xcode'
-" Plug 'arcticicestudio/nord-vim'
+Plug 'dlarocque/balance'
+Plug 'craftzdog/solarized-osaka.nvim'
+Plug 'nordtheme/vim'
 Plug 'vim-airline/vim-airline-themes'  
-" Plug 'nanotech/jellybeans.vim'
+Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
-
-lua require("dlarocque")
-"lua require'nvim-treesitter.configs'.setup { highlight = { enable = true }, incremental_selection = { enable = true }, textobjects = { enable = true }}
-
-" better colors
-if has('termguicolors')
-    set termguicolors
-endif
 
 syntax on
 set background=dark
-colorscheme default
+colorscheme balance
 
 " set relativenumber                          " relative line numbers
-set nonu                                      " show the actual line number
+" set nu                                      " show the actual line number
 set hidden
 set nowrap                                  " no wrapping
 set showmatch                               " highlight matching brackets
@@ -74,13 +43,15 @@ set mouse=a                                 " mouse clicking
 set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
-set colorcolumn=80
+" set colorcolumn=80
 set signcolumn=no                          " show the sign column on the lhs
-set guicursor=n-v-c:block-Cursor
-set guicursor+=i:ver100-iCursor
-set guicursor+=n-v-c:blinkon0
-set guicursor+=i:blinkwait10
-set guicursor=i:block
+" set guicursor=n-v-c:block-Cursor
+" set guicursor+=i:ver100-iCursor
+" set guicursor+=n-v-c:blinkon0
+" set guicursor+=i:blinkwait10
+" set guicursor=i:block
+set autowrite
+set splitright
 filetype plugin on
 
 " netrw
@@ -133,9 +104,9 @@ xnoremap L $
 
 " window management
 " nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
-nnoremap <leader>t :Ex<CR>
+nnoremap <leader>d :Ex<CR>
 
-nnoremap<leader>rc :e $MYVIMRC<CR>
+nnoremap<leader>vrc :e $MYVIMRC<CR>
 
 " quick source
 nnoremap <leader><CR> :w<bar>:so %<CR> " save and source
@@ -179,8 +150,25 @@ xnoremap y myy
 autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif 
 
 " gopls and vim-go
-" let g:go_def_mode='gopls'
-" let g:go_info_mode='gopls'
+map <C-n> :cnext<CR>
+map <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+autocmd FileType go nmap <leader>r  <Plug>(go-run)
+let g:go_fmt_command = "goimports"
+let g:go_metalinter_autosave = 1
+
+" run :GoBuild or :GoTestCompile based on the go file
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>t  <Plug>(go-test)
 
 " OPTIONS
 " Ignore certain files and folders when globing
