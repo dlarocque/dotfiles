@@ -7,18 +7,18 @@ TERM = "xterm-256color"
 decorations = "full"
 
 [font]
-size = 10.0
+size = 16.0
 
 [font.normal]
-family = "monospace"
+family = "Monaco"
 style = "Regular"
 
 [font.bold]
-family = "monospace"
+family = "Monaco"
 style = "Bold"
 
 [font.italic]
-family = "monospace"
+family = "Monaco"
 style = "Italic"
 
 [scrolling]
