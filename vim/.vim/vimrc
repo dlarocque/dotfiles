@@ -1,17 +1,21 @@
 call plug#begin()
-Plug 'dense-analysis/ale'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 Plug 'tpope/vim-commentary'     " Easy commenting/uncommenting
 Plug 'tpope/vim-fugitive'   " Git change indicators in the gutter
-Plug 'neoclide/coc.nvim', {'branch': 'release'}  " LSP client (coc.nvim)
 Plug 'junegunn/seoul256.vim'
 Plug 'lifepillar/vim-solarized8'
+Plug 'dlarocque/cider.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'nordtheme/vim'
 call plug#end()
 
 set termguicolors
 
 syntax on
-color solarized8_flat
+color nord
+set background=dark
 
 set nu                                      " show the actual line number
 set hidden
@@ -64,14 +68,12 @@ xnoremap H 0
 nnoremap L $
 xnoremap L $
 
-nnoremap fr :ALEFindReferences<CR>
-
 " window management
 " nnoremap <leader>pv :wincmd v<bar> :Ex <bar> :vertical resize 30<CR>  " open file tree on lhs at size 30
 nnoremap <leader>t :Ex<CR>
 
 " open my vimrc
-nnoremap<leader>rc :e $MYVIMRC<CR>
+nnoremap <leader>rc :e $MYVIMRC<CR>
 
 " quick source
 nnoremap <leader><CR> :w<bar>:so %<CR> " save and source
@@ -85,7 +87,18 @@ nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
 
 " File search with fzf and ripgrep
-nnoremap <leader>f :Files<CR>
+nnoremap <leader>ff :Files<CR>
+nnoremap <leader>fh :Files ~<CR>
+nnoremap <leader>fb :Buffers<CR>
+nnoremap <leader>fs :RG<CR>
+nnoremap <leader>fw :RG <C-R><C-W><CR>
+nnoremap <leader>fc :Commits<CR>
+
+let g:fzf_preview_window = ['down,70%,border-top', 'ctrl-/']
+
+" Enable per-command history.
+" Pressing <Up> will show previous fzf queries for that command.
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 
 " Clear annoying and persistent highlighting after search
 if maparg('<C-L>', 'n') ==# ''
@@ -106,6 +119,6 @@ set wildignore+=*.jpg,*.png,*.jpeg,*.bmp,*.gif,*.tiff,*.svg,*.ico
 set wildignore+=*.pyc,*.pkl
 set wildignore+=*.DS_Store
 set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
-set wildignorecase  " ignore file and dir name cases in cmd-completionf
+set wildignorecase  " ignore file and dir name cases in cmd-completion
 
 au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
