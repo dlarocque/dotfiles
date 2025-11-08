@@ -1,20 +1,26 @@
 call plug#begin()
+" Searching
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'tpope/vim-commentary'     " Easy commenting/uncommenting
-Plug 'tpope/vim-fugitive'   " Git change indicators in the gutter
-Plug 'junegunn/seoul256.vim'
+" Git
+Plug 'tpope/vim-fugitive'
+
+" Tabline
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+" Themes
 Plug 'lifepillar/vim-solarized8'
-Plug 'dlarocque/cider.vim'
-Plug 'chriskempson/base16-vim'
-Plug 'nordtheme/vim'
+" Plug 'dlarocque/cider.vim'
+" Plug 'chriskempson/base16-vim'
+" Plug 'nordtheme/vim'
 call plug#end()
 
 set termguicolors
 
 syntax on
-color nord
+color solarized8
 set background=dark
 
 set nu                                      " show the actual line number
