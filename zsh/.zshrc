@@ -127,3 +127,5 @@ alias gdw="git diff --word-diff"
 alias gw="git whatchanged"
 alias gpo="git push origin"
 
+source ~/.fzf.zsh
+

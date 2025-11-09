@@ -19,8 +19,10 @@ call plug#end()
 
 set termguicolors
 
+let g:airline_theme='solarized'
+
 syntax on
-color solarized8
+color dlarocque
 set background=dark
 
 set nu                                      " show the actual line number
