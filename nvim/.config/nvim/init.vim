@@ -49,6 +49,18 @@ syntax on
 set background=dark
 colorscheme solarized8
 
+" Match dlarocque's darker background across editors/terminals
+augroup darken_solarized_bg
+  autocmd!
+  autocmd ColorScheme solarized8 hi Normal       guibg=#00141a ctermbg=NONE
+  autocmd ColorScheme solarized8 hi NormalNC     guibg=#00141a ctermbg=NONE
+  autocmd ColorScheme solarized8 hi LineNr       guibg=#00141a ctermbg=NONE
+  autocmd ColorScheme solarized8 hi SignColumn   guibg=#00141a ctermbg=NONE
+  autocmd ColorScheme solarized8 hi EndOfBuffer  guibg=#00141a ctermbg=NONE
+augroup END
+" Re-apply now that the autocmd is registered (colorscheme already loaded above)
+doautocmd ColorScheme solarized8
+
 " set relativenumber                          " relative line numbers
 " set nu                                      " show the actual line number
 set hidden

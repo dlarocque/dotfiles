@@ -2,7 +2,7 @@ live_config_reload = true
 
 # Solarized Dark — same palette as ghostty so themes match across terminals
 [colors.primary]
-background = "#002b36"
+background = "#00141a"
 foreground = "#839496"
 
 [colors.normal]
