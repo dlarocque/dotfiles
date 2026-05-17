@@ -8,8 +8,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-# Prompt is rendered by starship (init at the bottom of this file).
-# Leave ZSH_THEME empty so oh-my-zsh doesn't draw its own prompt.
 ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
@@ -75,56 +73,40 @@ ZSH_THEME=""
 plugins=(
   git
   vi-mode
-  sudo                      # Esc Esc to prepend sudo
-  dirhistory                # alt+arrow to navigate dir history
-  command-not-found         # suggest brew formula for missing cmds
-  safe-paste                # bracketed paste, no accidental run
-  extract                   # `x foo.tar.gz` universal archive extractor
-  # External, cloned by bootstrap.sh into $ZSH/custom/plugins/:
-  fzf-tab                   # Tab opens fzf for the argument
-  zsh-syntax-highlighting   # MUST be last — instruments command buffer
+  sudo
+  dirhistory
+  command-not-found
+  safe-paste
+  extract
+  fzf-tab
+  zsh-syntax-highlighting   # must be last
 )
-# Note: zsh-autosuggestions intentionally NOT loaded — the gray inline
-# predictions were more distracting than useful. Use Ctrl+R (atuin) for
-# history search and Tab (fzf-tab) for completion instead.
 
-# vi-mode: snappy mode switching. Default is 40 (= 400ms after Esc),
-# which makes pressing Esc + another key feel laggy.
 export KEYTIMEOUT=1
-
-# Cursor shape changes per mode (vi-mode plugin handles this when set).
 VI_MODE_SET_CURSOR=true
 
-# ── Shell options ────────────────────────────────────────────────────
-setopt AUTO_CD               # type a dir name to cd into it
-setopt EXTENDED_GLOB         # ^, ~, # patterns in globs
-setopt INTERACTIVE_COMMENTS  # # comments in interactive shell
-setopt NO_BEEP               # never beep
-setopt NOTIFY                # report bg job state changes immediately
-setopt LONG_LIST_JOBS        # long format for `jobs`
+setopt AUTO_CD
+setopt EXTENDED_GLOB
+setopt INTERACTIVE_COMMENTS
+setopt NO_BEEP
+setopt NOTIFY
+setopt LONG_LIST_JOBS
 
-# ── History (atuin handles search; these are for raw zsh history) ────
 HISTSIZE=50000
 SAVEHIST=50000
 HISTFILE="$HOME/.zsh_history"
-setopt SHARE_HISTORY         # share history across sessions immediately
-setopt HIST_IGNORE_ALL_DUPS  # keep only most recent of duplicate cmds
-setopt HIST_IGNORE_SPACE     # ' cmd' (leading space) doesn't go to history
-setopt HIST_REDUCE_BLANKS    # trim whitespace before writing
-setopt HIST_VERIFY           # `!!` expands but waits for Enter to run
-setopt INC_APPEND_HISTORY    # append as commands run, not at shell exit
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_ALL_DUPS
+setopt HIST_IGNORE_SPACE
+setopt HIST_REDUCE_BLANKS
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY
 
-# ── Tab completion ───────────────────────────────────────────────────
-# Case-insensitive matching, partial-word completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
-# Menu-select with arrow keys
 zstyle ':completion:*' menu select
-# Colors in completion menu (uses LS_COLORS)
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# Group completions by category with headers
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'
-# fzf-tab: render the completion menu with fzf, show preview on the right
 zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=numbers --line-range=:200 $realpath 2>/dev/null || eza --tree --color=always $realpath 2>/dev/null || ls -la $realpath'
 zstyle ':fzf-tab:*' fzf-flags --height=40% --layout=reverse --border
 
@@ -169,7 +151,6 @@ case "$OSTYPE" in
     ;;
 esac
 
-# ── nvm + auto-`nvm use` on cd into a dir with .nvmrc ──────────────────
 export NVM_DIR="$HOME/.nvm"
 case "$OSTYPE" in
   darwin*)
@@ -207,18 +188,15 @@ if command -v nvm >/dev/null 2>&1; then
   load-nvmrc
 fi
 
-# ── Tool env vars ──────────────────────────────────────────────────────
 export EDITOR=vim
 export PYTHONSTARTUP="$HOME/.pythonrc"
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 export BAT_THEME="ansi"
 
-# fzf: use ripgrep for file listing; show preview with bat
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
 export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} 2>/dev/null || ls -la {}'"
-# Layout / theme — keep your existing FZF_DEFAULT_OPTS in .fzf.zsh-ish style:
 export FZF_DEFAULT_OPTS='
   --preview-window="border-sharp" --prompt="" --marker=">" --pointer="*"
   --separator="─" --scrollbar="│" --layout="reverse" --info="right"
@@ -248,15 +226,9 @@ alias gdw="git diff --word-diff"
 alias gw="git whatchanged"
 alias gpo="git push origin"
 
-# ── Tool init lines — keep at the bottom; some depend on others ──────
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
 command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
-
-# atuin: Ctrl+R searches history. Up-arrow stays as zsh default.
 command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
-
-# starship prompt (last so it can read everything above)
 command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local

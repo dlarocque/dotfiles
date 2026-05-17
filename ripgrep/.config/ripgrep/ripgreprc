@@ -1,6 +1,3 @@
-# ripgrep — sourced via RIPGREP_CONFIG_PATH (set in zshrc).
-# Reference: https://github.com/BurntSushi/ripgrep/blob/master/GUIDE.md#configuration-file
-
 --smart-case
 --max-columns=150
 --max-columns-preview
@@ -10,7 +7,6 @@
 --glob=!.venv/*
 --glob=!__pycache__/*
 
-# Default colors (override if your terminal theme prefers otherwise)
 --colors=line:none
 --colors=line:style:bold
 --colors=path:fg:green

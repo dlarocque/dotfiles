@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
-# mkcd DIR — mkdir DIR (with parents) then cd into it.
-# Must be sourced or used as a function to actually cd in the calling shell.
-# This standalone version prints the path so you can `cd "$(mkcd foo)"`.
-
+# usage: mkcd DIR
 set -euo pipefail
 
 if [ $# -ne 1 ]; then

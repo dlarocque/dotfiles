@@ -1,5 +1,4 @@
 {
-  // ── Editor — minimal, predictable ──────────────────────────────────
   "editor.fontFamily": "DejaVuSansM Nerd Font Mono, Menlo, monospace",
   "editor.fontSize": 14,
   "editor.lineHeight": 1.5,
@@ -20,7 +19,6 @@
   "editor.formatOnSave": false,
   "editor.linkedEditing": false,
 
-  // ── Files ──────────────────────────────────────────────────────────
   "files.insertFinalNewline": true,
   "files.trimTrailingWhitespace": true,
   "files.trimFinalNewlines": true,
@@ -34,7 +32,6 @@
     "**/node_modules": true
   },
 
-  // ── Workbench — quiet UI ───────────────────────────────────────────
   "workbench.colorTheme": "Solarized Dark",
   "workbench.iconTheme": null,
   "workbench.startupEditor": "none",
@@ -46,19 +43,16 @@
   "workbench.welcomePage.walkthroughs.openOnInstall": false,
   "breadcrumbs.enabled": false,
 
-  // ── Window ─────────────────────────────────────────────────────────
   "window.titleBarStyle": "native",
   "window.commandCenter": false,
   "window.menuBarVisibility": "compact",
 
-  // ── Terminal ───────────────────────────────────────────────────────
   "terminal.integrated.fontFamily": "DejaVuSansM Nerd Font Mono",
   "terminal.integrated.fontSize": 14,
   "terminal.integrated.cursorBlinking": false,
   "terminal.integrated.cursorStyle": "block",
   "terminal.integrated.defaultProfile.osx": "zsh",
 
-  // ── Telemetry & noise off ──────────────────────────────────────────
   "telemetry.telemetryLevel": "off",
   "update.showReleaseNotes": false,
   "extensions.ignoreRecommendations": true,
@@ -66,7 +60,6 @@
   "git.autofetch": false,
   "scm.diffDecorations": "gutter",
 
-  // ── Vim extension (vscodevim) — load if installed ─────────────────
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": true,
   "vim.hlsearch": true,
@@ -77,7 +70,6 @@
     "<C-f>": false
   },
 
-  // ── Language-specific overrides ────────────────────────────────────
   "[python]": { "editor.tabSize": 4 },
   "[go]":     { "editor.tabSize": 4, "editor.insertSpaces": false },
   "[rust]":   { "editor.tabSize": 4 },

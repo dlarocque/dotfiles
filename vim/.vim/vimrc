@@ -5,12 +5,12 @@ Plug 'junegunn/fzf.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'                 " gutter signs for VCS changes
+Plug 'mhinz/vim-signify'
 
-" Tags (jump-to-definition without LSP)
+" Tags
 Plug 'ludovicchabant/vim-gutentags'
 
-" Linting (background, on save; uses installed CLI linters)
+" Linting
 Plug 'dense-analysis/ale'
 
 " Tabline
@@ -21,14 +21,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
-set termguicolors
+" set termguicolors
 
 let g:airline_theme='minimalist'
 
 syntax on
 set background=dark
-" No colorscheme — let the terminal background show through.
-" The ColorScheme autocmd makes this stick if a scheme is loaded later.
 augroup transparent_bg
   autocmd!
   autocmd ColorScheme * hi Normal      guibg=NONE ctermbg=NONE
@@ -60,8 +58,8 @@ set softtabstop=2
 set mouse=a                                 " mouse clicking
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=yes                          " always reserve gutter — prevents text shift
-set updatetime=300                          " faster signify/ALE refresh
+set signcolumn=yes
+set updatetime=300
 set re=0
 
 if has('mac')
@@ -149,20 +147,23 @@ set wildignorecase  " ignore file and dir name cases in cmd-completion
 
 au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
 
-" ── ALE: lint on save, never on every keystroke ──────────────────────
+" ALE
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_lint_on_insert_leave = 0
-let g:ale_fix_on_save = 0                    " explicit fixes only — never auto-rewrite
+let g:ale_fix_on_save = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+let g:ale_sign_error   = '●'
+let g:ale_sign_warning = '○'
+let g:ale_sign_info    = '•'
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
 nnoremap <leader>ad :ALEDetail<CR>
 
-" ── gutentags: ctags for jump-to-definition (lexical, not semantic) ──
+" gutentags
 let g:gutentags_cache_dir = expand('~/.cache/vim/gutentags')
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['.git', '.hg', 'package.json', 'Cargo.toml', 'go.mod', 'pyproject.toml']
@@ -170,14 +171,9 @@ let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 
-" ── signify: VCS gutter signs ─ vertical bar in every slot, color does the work
+" signify
 let g:signify_sign_add               = '▎'
 let g:signify_sign_delete            = '▎'
 let g:signify_sign_delete_first_line = '▔'
 let g:signify_sign_change            = '▎'
 let g:signify_sign_show_count        = 0
-
-" ── ALE: same minimalist sign style ──────────────────────────────
-let g:ale_sign_error   = '●'
-let g:ale_sign_warning = '○'
-let g:ale_sign_info    = '•'

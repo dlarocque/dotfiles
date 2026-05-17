@@ -1,12 +1,8 @@
-# Python REPL startup — sourced via PYTHONSTARTUP (set in zshrc).
-# Adds history, tab completion, and a slightly tidier prompt.
-
 import atexit
 import os
 import readline
 import rlcompleter  # noqa: F401
 
-# Persistent history
 _history_path = os.path.expanduser("~/.python_history")
 try:
     readline.read_history_file(_history_path)
@@ -16,8 +12,6 @@ except FileNotFoundError:
 readline.set_history_length(10000)
 atexit.register(readline.write_history_file, _history_path)
 
-# Tab completion
 readline.parse_and_bind("tab: complete")
 
-# Cleanup the namespace so it doesn't leak into the REPL.
 del atexit, os, readline, rlcompleter, _history_path

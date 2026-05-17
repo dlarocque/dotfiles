@@ -1,18 +1,12 @@
-# Atuin — shell history, local only (no sync).
-# Reference: https://docs.atuin.sh/configuration/config/
-
-## Sync
 sync_address = ""
 auto_sync = false
 update_check = false
 
-## Storage / search
 db_path = "~/.local/share/atuin/history.db"
 search_mode = "fuzzy"
 filter_mode = "global"
 filter_mode_shell_up_key_binding = "session"
 
-## UI
 style = "compact"
 show_preview = true
 inline_height = 20
@@ -21,7 +15,6 @@ show_help = true
 exit_mode = "return-original"
 keymap_mode = "emacs"
 
-## What to record
 history_filter = [
   "^secret-cmd",
   "^password",

@@ -8,8 +8,6 @@
     editor = vim
 [credential "https://dev.azure.com"]
     useHttpPath = true
-# Auto-rewrite GitHub HTTPS URLs to SSH so plain `git clone https://github.com/…`
-# uses your ssh key instead of prompting for username/token.
 [url "git@github.com:"]
     insteadOf = https://github.com/
 [include]

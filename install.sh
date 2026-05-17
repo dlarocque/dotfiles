@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-# Stow dotfiles for a given environment.
-#
-# Usage:
-#   ./install.sh                  # auto-detect from `uname`
-#   ./install.sh macos
-#   ./install.sh linux-kinesis
-#   ./install.sh --list
-#   ./install.sh --dry-run [env]
-#
-# Add a new environment by appending a case branch in pick_packages().
-
+# usage: install.sh [env] [--list] [--dry-run]
 set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -62,7 +52,7 @@ main() {
     case "$arg" in
       --list) list_envs; exit 0 ;;
       --dry-run) dry_run=1 ;;
-      -h|--help) sed -n '2,11p' "$0"; exit 0 ;;
+      -h|--help) sed -n '2p' "$0"; exit 0 ;;
       *) env="$arg" ;;
     esac
   done
@@ -72,10 +62,6 @@ main() {
 
   command -v stow >/dev/null || { echo "stow not found in PATH" >&2; exit 1; }
 
-  # Unfold legacy single-package symlinks. When the repo had only one
-  # package contributing to ~/.config (just gh/), stow folded it into a
-  # single symlink. With multiple packages contributing now, that fold
-  # has to be broken so stow can manage each child individually.
   if [ "$dry_run" -eq 0 ] && [ -L "$HOME/.config" ]; then
     local target
     target=$(readlink "$HOME/.config")
@@ -104,10 +90,6 @@ main() {
     echo "would link ~/.gitconfig.os -> $OS_GITCONFIG"
   fi
 
-  # Ghostty on macOS reads BOTH the XDG path (~/.config/ghostty/config, our
-  # stowed file) AND ~/Library/Application Support/com.mitchellh.ghostty/config.
-  # Symlink the Library path to our stowed file so they're a single source of
-  # truth, and remove any stale config.ghostty file from earlier install runs.
   if [ "$dry_run" -eq 0 ] && [ "$env" = "macos" ]; then
     local ghostty_lib="$HOME/Library/Application Support/com.mitchellh.ghostty"
     local ghostty_xdg="$HOME/.config/ghostty/config"
@@ -120,8 +102,6 @@ main() {
     fi
   fi
 
-  # VSCode / Cursor settings — path doesn't fit XDG, can't be stowed cleanly.
-  # Symlink directly to whichever apps' user dirs exist.
   if [ "$dry_run" -eq 0 ]; then
     case "$env" in
       macos)

@@ -1,35 +1,12 @@
 #!/usr/bin/env bash
-# perf-snapshot — capture a timestamped snapshot of system perf state
-# into ~/perf-snapshots/<YYYYMMDD-HHMMSS>/ for later comparison.
-#
-# Useful for: before/after tuning, archiving a known-good baseline,
-# remembering what a machine looked like a year ago.
-#
-# Captures (macOS, best effort; skips quietly if a tool isn't installed):
-#   - hardware: chip, RAM, storage
-#   - CPU detail (sysctl machdep.cpu, including cache sizes)
-#   - lstopo SVG (visual: cores + L1/L2/L3 caches + NUMA)
-#   - memory: vm_stat
-#   - disks: df, mount
-#   - network: ifconfig, routing table
-#   - process snapshot: top -l 1
-#   - power state: powermetrics 1-sample (sudo only)
-#   - thermal pressure: pmset -g therm (sudo only)
-#
-# Sudo bits run only with --sudo. Otherwise the snapshot completes
-# with annotations noting what was skipped.
-
+# usage: perf-snapshot [--sudo]
+# Snapshot system perf state into ~/perf-snapshots/<YYYYMMDD-HHMMSS>/.
 set -euo pipefail
 
 WITH_SUDO=0
 case "${1:-}" in
   --sudo) WITH_SUDO=1 ;;
-  -h|--help)
-    sed -n '2,21p' "$0"
-    echo
-    echo "usage: perf-snapshot [--sudo]"
-    exit 0
-    ;;
+  -h|--help) sed -n '2,4p' "$0"; exit 0 ;;
 esac
 
 TS="$(date +%Y%m%d-%H%M%S)"
@@ -38,7 +15,6 @@ mkdir -p "$OUT"
 
 log() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 cap() {
-  # cap <filename> <command...>  — write stdout+stderr to OUT/filename
   local file="$1"; shift
   if ! command -v "$1" >/dev/null 2>&1 && [[ "$1" != /* ]]; then
     echo "(skipped: '$1' not installed)" > "$OUT/$file"
@@ -88,7 +64,6 @@ case "$OS" in
     ;;
 esac
 
-# lstopo on either OS — visual topology with caches
 if command -v lstopo >/dev/null 2>&1; then
   log "topology.svg ← lstopo"
   lstopo --of svg "$OUT/topology.svg" 2>/dev/null || true

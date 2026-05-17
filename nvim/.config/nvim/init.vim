@@ -5,27 +5,18 @@ Plug 'junegunn/fzf.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
-Plug 'lewis6991/gitsigns.nvim'           " gutter signs for VCS changes
+Plug 'lewis6991/gitsigns.nvim'
 
-" Tags (jump-to-definition without LSP)
+" Tags
 Plug 'ludovicchabant/vim-gutentags'
 
-" Linting (background, on save; uses installed CLI linters)
+" Linting
 Plug 'dense-analysis/ale'
 
 " Languages
 Plug 'fatih/vim-go'
-
-" No colorscheme plugin — using nvim's built-in habamax (neutral dark).
-" Alternates kept here for quick re-enable:
-" Plug 'lifepillar/vim-solarized8'
-" Plug 'dlarocque/balance'
-" Plug 'craftzdog/solarized-osaka.nvim'
-" Plug 'nordtheme/vim'
-" Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
 
-" Activate gitsigns (lua plugin needs a setup call)
 lua << EOF
 require('gitsigns').setup({
   signs = {
@@ -47,7 +38,6 @@ endif
 
 syntax on
 set background=dark
-" No colorscheme — let the terminal background show through.
 augroup transparent_bg
   autocmd!
   autocmd ColorScheme * hi Normal       guibg=NONE ctermbg=NONE
@@ -84,8 +74,8 @@ set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=yes                          " always reserve gutter — prevents text shift
-set updatetime=300                          " faster signify/ALE refresh
+set signcolumn=yes
+set updatetime=300
 " set guicursor=n-v-c:block-Cursor
 " set guicursor+=i:ver100-iCursor
 " set guicursor+=n-v-c:blinkon0
@@ -185,7 +175,7 @@ set wildignorecase  " ignore file and dir name cases in cmd-completionf
 " MISC
 au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
 
-" ── ALE: lint on save, never on every keystroke ──────────────────────
+" ALE
 let g:ale_lint_on_save = 1
 let g:ale_lint_on_enter = 1
 let g:ale_lint_on_text_changed = 'never'
@@ -194,14 +184,14 @@ let g:ale_fix_on_save = 0
 let g:ale_set_loclist = 1
 let g:ale_set_quickfix = 0
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
-nmap <silent> [g <Plug>(ale_previous_wrap)
-nmap <silent> ]g <Plug>(ale_next_wrap)
-nnoremap <leader>ad :ALEDetail<CR>
 let g:ale_sign_error   = '●'
 let g:ale_sign_warning = '○'
 let g:ale_sign_info    = '•'
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+nnoremap <leader>ad :ALEDetail<CR>
 
-" ── gutentags: ctags for jump-to-definition ──────────────────────────
+" gutentags
 let g:gutentags_cache_dir = expand('~/.cache/nvim/gutentags')
 let g:gutentags_add_default_project_roots = 0
 let g:gutentags_project_root = ['.git', '.hg', 'package.json', 'Cargo.toml', 'go.mod', 'pyproject.toml']

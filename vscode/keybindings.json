@@ -1,12 +1,9 @@
 [
-  // Cmd-D to duplicate line (since multi-cursor is on Cmd-D by default — remap that to Shift-Cmd-L)
   {
     "key": "shift+cmd+d",
     "command": "editor.action.copyLinesDownAction",
     "when": "editorTextFocus"
   },
-
-  // Quick toggle terminal (matches a lot of muscle memory)
   {
     "key": "ctrl+`",
     "command": "workbench.action.terminal.toggleTerminal",
