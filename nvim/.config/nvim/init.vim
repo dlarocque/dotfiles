@@ -16,9 +16,6 @@ Plug 'dense-analysis/ale'
 " Languages
 Plug 'fatih/vim-go'
 
-" Snippets
-Plug 'SirVer/ultisnips'
-
 " Color Schemes
 Plug 'dlarocque/balance'
 Plug 'craftzdog/solarized-osaka.nvim'
