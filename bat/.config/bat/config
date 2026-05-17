@@ -1,0 +1,10 @@
+# bat — `cat` with syntax highlighting and paging.
+# Reference: https://github.com/sharkdp/bat#configuration-file
+
+--theme="ansi"
+--style="numbers,changes,header"
+--paging=auto
+
+# Map filenames to languages bat doesn't auto-detect.
+# --map-syntax "*.jenkinsfile:Groovy"
+# --map-syntax ".ignore:Git Ignore"

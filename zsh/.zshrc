@@ -8,7 +8,9 @@ export ZSH="$HOME/.oh-my-zsh"
 # load a random theme each time Oh My Zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="robbyrussell"
+# Prompt is rendered by starship (init at the bottom of this file).
+# Leave ZSH_THEME empty so oh-my-zsh doesn't draw its own prompt.
+ZSH_THEME=""
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -102,6 +104,7 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 
@@ -112,6 +115,57 @@ case "$OSTYPE" in
     ;;
 esac
 
+# ── nvm + auto-`nvm use` on cd into a dir with .nvmrc ──────────────────
+export NVM_DIR="$HOME/.nvm"
+case "$OSTYPE" in
+  darwin*)
+    [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+    [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+    ;;
+  linux*)
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    ;;
+esac
+
+if command -v nvm >/dev/null 2>&1; then
+  autoload -U add-zsh-hook
+  load-nvmrc() {
+    local nvmrc_path
+    nvmrc_path="$(nvm_find_nvmrc)"
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_version
+      nvmrc_version=$(nvm version "$(cat "$nvmrc_path")")
+      if [ "$nvmrc_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_version" != "$(nvm version)" ]; then
+        nvm use
+      fi
+    elif [ "$(nvm version)" != "$(nvm version default)" ]; then
+      nvm use default >/dev/null
+    fi
+  }
+  add-zsh-hook chpwd load-nvmrc
+  load-nvmrc
+fi
+
+# ── Tool env vars ──────────────────────────────────────────────────────
+export EDITOR=vim
+export PYTHONSTARTUP="$HOME/.pythonrc"
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
+export BAT_THEME="ansi"
+
+# fzf: use ripgrep for file listing; show preview with bat
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} 2>/dev/null || ls -la {}'"
+# Layout / theme — keep your existing FZF_DEFAULT_OPTS in .fzf.zsh-ish style:
+export FZF_DEFAULT_OPTS='
+  --preview-window="border-sharp" --prompt="" --marker=">" --pointer="*"
+  --separator="─" --scrollbar="│" --layout="reverse" --info="right"
+'
+
 alias ls="ls --color=always"
 alias ll="ls -la --color=always"
 alias c="clear"
@@ -120,6 +174,8 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 
 alias vi="nvim"
+alias cat="bat --plain --paging=never"
+alias f="fd"
 
 alias gs="git status --short"
 alias gl="git log"
@@ -134,7 +190,16 @@ alias gdw="git diff --word-diff"
 alias gw="git whatchanged"
 alias gpo="git push origin"
 
+# ── Tool init lines — keep at the bottom; some depend on others ──────
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+command -v zoxide >/dev/null 2>&1 && eval "$(zoxide init zsh)"
+
+# atuin: Ctrl+R searches history. Up-arrow stays as zsh default.
+command -v atuin >/dev/null 2>&1 && eval "$(atuin init zsh --disable-up-arrow)"
+
+# starship prompt (last so it can read everything above)
+command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 
 [ -f ~/.zshrc.local ] && source ~/.zshrc.local
 

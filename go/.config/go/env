@@ -1,0 +1,3 @@
+GOPATH=${HOME}/go
+GOBIN=${HOME}/go/bin
+GOFLAGS=-mod=readonly

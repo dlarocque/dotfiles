@@ -14,7 +14,10 @@ set -euo pipefail
 
 DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-COMMON_PACKAGES=(zsh bash git vim nvim tmux fish gh zellij)
+COMMON_PACKAGES=(
+  zsh bash git vim nvim tmux fish gh zellij
+  ssh bin starship atuin bat ripgrep python go
+)
 
 pick_packages() {
   local env="$1"

@@ -4,3 +4,6 @@ vim/.vim/swap
 vim/.vim/undo
 vim/.vim/autoload
 .claude/
+
+# gh CLI runtime state (user identity / token refs) — machine-specific
+gh/.config/gh/hosts.yml

@@ -1,6 +1,54 @@
+# Personal note files I never want committed
 notes
 todo
 notes.md
 todo.md
 TODO.md
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Direnv / env files
+.envrc
+.direnv/
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Node
+node_modules/
+
+# Build artifacts (when not project-managed)
+dist/
+build/
+*.egg-info/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.backup
+
+# Misc
 **/.claude/settings.local.json
+.coverage
+coverage/
