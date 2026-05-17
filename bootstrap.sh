@@ -81,11 +81,23 @@ if [ ! -d "$HOME/.ssh/control" ]; then
   chmod 700 "$HOME/.ssh/control"
 fi
 
-# ── Oh My Zsh (zshrc assumes it exists) ────────────────────────────────
-if [ ! -d "$HOME/.oh-my-zsh" ]; then
-  log "Installing Oh My Zsh"
-  RUNZSH=no KEEP_ZSHRC=yes sh -c \
-    "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# ── Oh My Zsh (optional; zshrc tolerates its absence) ──────────────────
+if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
+  # Clear out anything in the way (dangling symlink, empty placeholder dir).
+  if [ -L "$HOME/.oh-my-zsh" ]; then
+    log "Removing dangling ~/.oh-my-zsh symlink"
+    rm "$HOME/.oh-my-zsh"
+  elif [ -d "$HOME/.oh-my-zsh" ]; then
+    rmdir "$HOME/.oh-my-zsh" 2>/dev/null || {
+      log "~/.oh-my-zsh exists but is not a valid omz install and not empty; skipping"
+    }
+  fi
+
+  if [ ! -e "$HOME/.oh-my-zsh" ]; then
+    log "Installing Oh My Zsh"
+    RUNZSH=no KEEP_ZSHRC=yes sh -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+  fi
 else
   log "Oh My Zsh already installed"
 fi
