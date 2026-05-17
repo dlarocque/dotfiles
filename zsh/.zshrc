@@ -81,10 +81,12 @@ plugins=(
   safe-paste                # bracketed paste, no accidental run
   extract                   # `x foo.tar.gz` universal archive extractor
   # External, cloned by bootstrap.sh into $ZSH/custom/plugins/:
-  fzf-tab                   # Tab opens fzf for the argument (must precede ohmyzsh compinit timing)
-  zsh-autosuggestions       # gray-inline suggestion from history
+  fzf-tab                   # Tab opens fzf for the argument
   zsh-syntax-highlighting   # MUST be last — instruments command buffer
 )
+# Note: zsh-autosuggestions intentionally NOT loaded — the gray inline
+# predictions were more distracting than useful. Use Ctrl+R (atuin) for
+# history search and Tab (fzf-tab) for completion instead.
 
 # vi-mode: snappy mode switching. Default is 40 (= 400ms after Esc),
 # which makes pressing Esc + another key feel laggy.

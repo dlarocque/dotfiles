@@ -154,7 +154,6 @@ fi
 # ── External zsh plugins (cloned into omz custom dir) ─────────────────
 ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
 for repo in \
-    "zsh-users/zsh-autosuggestions" \
     "zsh-users/zsh-syntax-highlighting" \
     "Aloxaf/fzf-tab"; do
   name="$(basename "$repo")"
