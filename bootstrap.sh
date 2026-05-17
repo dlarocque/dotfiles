@@ -87,6 +87,18 @@ check_font
 # Only run if user wants the fzf binary set up in shells we don't control.
 # Our zsh integration is stowed via zsh/.fzf.zsh.
 
+# ── vim-plug for vim ──────────────────────────────────────────────────
+# nvim's plug.vim is committed in the repo (nvim/.config/nvim/autoload/);
+# vim's isn't (vim/.vim/autoload is in .gitignore). Fetch it here.
+PLUG_VIM="$HOME/.vim/autoload/plug.vim"
+if [ ! -f "$PLUG_VIM" ]; then
+  log "Installing vim-plug for vim"
+  curl -fLo "$PLUG_VIM" --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+else
+  log "vim-plug already installed for vim"
+fi
+
 # ── TPM (Tmux Plugin Manager) ──────────────────────────────────────────
 TPM_DIR="$HOME/.tmux/plugins/tpm"
 if [ ! -d "$TPM_DIR" ]; then
