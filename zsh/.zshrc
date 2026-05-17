@@ -72,7 +72,14 @@ ZSH_THEME=""
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git vi-mode)
+
+# vi-mode: snappy mode switching. Default is 40 (= 400ms after Esc),
+# which makes pressing Esc + another key feel laggy.
+export KEYTIMEOUT=1
+
+# Cursor shape changes per mode (vi-mode plugin handles this when set).
+VI_MODE_SET_CURSOR=true
 
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 
