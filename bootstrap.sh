@@ -51,6 +51,7 @@ BREW_FORMULAE=(
 BREW_CASKS=(
   ghostty
   alacritty
+  font-dejavu-sans-mono-nerd-font   # terminal font used by ghostty + alacritty configs
 )
 
 log "Installing CLI tools (formulae)"
@@ -60,6 +61,26 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
   log "Installing GUI apps (casks)"
   brew install --cask "${BREW_CASKS[@]}" || true
 fi
+
+# ── Sanity check: terminal font installed? ─────────────────────────────
+check_font() {
+  local family="DejaVuSansM Nerd Font Mono"
+  case "$(uname -s)" in
+    Darwin)
+      if ! ls "$HOME/Library/Fonts" /Library/Fonts 2>/dev/null | grep -qi 'DejaVuSansMNerdFontMono'; then
+        log "WARNING: '$family' not found in ~/Library/Fonts or /Library/Fonts"
+        log "  Install via:  brew install --cask font-dejavu-sans-mono-nerd-font"
+      fi
+      ;;
+    Linux)
+      if command -v fc-list >/dev/null 2>&1 && ! fc-list | grep -qi "DejaVuSansM Nerd Font"; then
+        log "WARNING: '$family' not found by fontconfig"
+        log "  Install the .ttf into ~/.local/share/fonts/ and run 'fc-cache -fv'"
+      fi
+      ;;
+  esac
+}
+check_font
 
 # ── fzf key-bindings install (writes ~/.fzf.* files — we stow our own) ──
 # Only run if user wants the fzf binary set up in shells we don't control.

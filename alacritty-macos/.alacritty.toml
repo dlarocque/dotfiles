@@ -10,15 +10,15 @@ decorations = "full"
 size = 16.0
 
 [font.normal]
-family = "Monaco"
+family = "DejaVuSansM Nerd Font Mono"
 style = "Regular"
 
 [font.bold]
-family = "Monaco"
+family = "DejaVuSansM Nerd Font Mono"
 style = "Bold"
 
 [font.italic]
-family = "Monaco"
+family = "DejaVuSansM Nerd Font Mono"
 style = "Italic"
 
 [scrolling]
