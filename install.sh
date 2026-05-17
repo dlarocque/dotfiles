@@ -104,6 +104,22 @@ main() {
     echo "would link ~/.gitconfig.os -> $OS_GITCONFIG"
   fi
 
+  # Ghostty on macOS reads BOTH the XDG path (~/.config/ghostty/config, our
+  # stowed file) AND ~/Library/Application Support/com.mitchellh.ghostty/config.
+  # Symlink the Library path to our stowed file so they're a single source of
+  # truth, and remove any stale config.ghostty file from earlier install runs.
+  if [ "$dry_run" -eq 0 ] && [ "$env" = "macos" ]; then
+    local ghostty_lib="$HOME/Library/Application Support/com.mitchellh.ghostty"
+    local ghostty_xdg="$HOME/.config/ghostty/config"
+    rm -f "$HOME/.config/ghostty/config.ghostty"
+    if [ -d "$(dirname "$ghostty_lib")" ]; then
+      mkdir -p "$ghostty_lib"
+      rm -f "$ghostty_lib/config" "$ghostty_lib/config.ghostty"
+      ln -sfn "$ghostty_xdg" "$ghostty_lib/config"
+      echo "linked $ghostty_lib/config -> $ghostty_xdg"
+    fi
+  fi
+
   # VSCode / Cursor settings — path doesn't fit XDG, can't be stowed cleanly.
   # Symlink directly to whichever apps' user dirs exist.
   if [ "$dry_run" -eq 0 ]; then
