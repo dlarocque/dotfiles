@@ -1,6 +1,11 @@
 font-family = "DejaVuSansM Nerd Font Mono"
 font-size = 16
 
+# Treat Option as Alt so terminal apps receive proper Alt key sequences
+# (zsh dirhistory's alt+arrow, readline word-motion, vim alt-mappings).
+# Without this, Option produces macOS special characters (Option+L = ¬).
+macos-option-as-alt = true
+
 # Pure black background; everything else (foreground, palette) inherits
 # ghostty's defaults. Bump to #0a0a0a or #111111 if pure black feels harsh.
 background = #000000
