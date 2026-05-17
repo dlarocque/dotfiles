@@ -49,6 +49,11 @@ BREW_FORMULAE=(
   shellcheck      # script linting
   universal-ctags # gutentags backend (jump-to-definition in vim/nvim)
   btop            # system monitor
+  # ── Performance / profiling toolkit ──────────────────────────────
+  hwloc           # lstopo: visualize CPU + cache + NUMA topology
+  hyperfine       # statistical command-line benchmarking
+  samply          # sampling profiler -> Firefox Profiler viewable
+  bandwhich       # per-process network bandwidth
 )
 BREW_CASKS=(
   ghostty
@@ -62,6 +67,15 @@ brew install "${BREW_FORMULAE[@]}" || true
 if [[ "$(uname -s)" == "Darwin" ]]; then
   log "Installing GUI apps (casks)"
   brew install --cask "${BREW_CASKS[@]}" || true
+
+  # Xcode Command Line Tools — unlocks Instruments, xctrace, sample,
+  # leaks, heap, vmmap, fs_usage, powermetrics. The macOS perf foundation.
+  if ! xcode-select -p >/dev/null 2>&1; then
+    log "Installing Xcode Command Line Tools (interactive prompt)"
+    xcode-select --install || true
+  else
+    log "Xcode Command Line Tools already installed"
+  fi
 fi
 
 # ── Sanity check: terminal font installed? ─────────────────────────────

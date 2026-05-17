@@ -1,0 +1,102 @@
+#!/usr/bin/env bash
+# perf-snapshot — capture a timestamped snapshot of system perf state
+# into ~/perf-snapshots/<YYYYMMDD-HHMMSS>/ for later comparison.
+#
+# Useful for: before/after tuning, archiving a known-good baseline,
+# remembering what a machine looked like a year ago.
+#
+# Captures (macOS, best effort; skips quietly if a tool isn't installed):
+#   - hardware: chip, RAM, storage
+#   - CPU detail (sysctl machdep.cpu, including cache sizes)
+#   - lstopo SVG (visual: cores + L1/L2/L3 caches + NUMA)
+#   - memory: vm_stat
+#   - disks: df, mount
+#   - network: ifconfig, routing table
+#   - process snapshot: top -l 1
+#   - power state: powermetrics 1-sample (sudo only)
+#   - thermal pressure: pmset -g therm (sudo only)
+#
+# Sudo bits run only with --sudo. Otherwise the snapshot completes
+# with annotations noting what was skipped.
+
+set -euo pipefail
+
+WITH_SUDO=0
+case "${1:-}" in
+  --sudo) WITH_SUDO=1 ;;
+  -h|--help)
+    sed -n '2,21p' "$0"
+    echo
+    echo "usage: perf-snapshot [--sudo]"
+    exit 0
+    ;;
+esac
+
+TS="$(date +%Y%m%d-%H%M%S)"
+OUT="$HOME/perf-snapshots/$TS"
+mkdir -p "$OUT"
+
+log() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
+cap() {
+  # cap <filename> <command...>  — write stdout+stderr to OUT/filename
+  local file="$1"; shift
+  if ! command -v "$1" >/dev/null 2>&1 && [[ "$1" != /* ]]; then
+    echo "(skipped: '$1' not installed)" > "$OUT/$file"
+    return
+  fi
+  log "$file ← $*"
+  "$@" > "$OUT/$file" 2>&1 || true
+}
+
+cap_sudo() {
+  local file="$1"; shift
+  if [[ "$WITH_SUDO" -eq 0 ]]; then
+    echo "(skipped: rerun with --sudo to capture)" > "$OUT/$file"
+    return
+  fi
+  log "$file ← sudo $*"
+  sudo "$@" 2>&1 | tee "$OUT/$file" >/dev/null || true
+}
+
+OS="$(uname -s)"
+echo "$OS $(uname -r) $(uname -m)" > "$OUT/uname.txt"
+date > "$OUT/captured-at.txt"
+
+case "$OS" in
+  Darwin)
+    cap hardware.txt        system_profiler SPHardwareDataType -detailLevel mini
+    cap cpu-sysctl.txt      sysctl -a machdep.cpu hw
+    cap vm_stat.txt         vm_stat
+    cap df.txt              df -h
+    cap mount.txt           mount
+    cap ifconfig.txt        ifconfig
+    cap netstat-routes.txt  netstat -nr
+    cap top-snapshot.txt    top -l 1 -n 30 -o cpu
+    cap_sudo powermetrics.txt powermetrics --samplers cpu_power,gpu_power,thermal -i 1000 -n 1
+    cap_sudo thermal.txt      pmset -g therm
+    cap_sudo io-stats.txt     iostat -d -c 1 disk0
+    ;;
+  Linux)
+    cap hardware.txt        lscpu
+    cap meminfo.txt         cat /proc/meminfo
+    cap df.txt              df -h
+    cap mount.txt           mount
+    cap ip-a.txt            ip addr
+    cap ip-r.txt            ip route
+    cap top-snapshot.txt    top -bn1
+    cap_sudo dmidecode.txt  dmidecode -t memory
+    ;;
+esac
+
+# lstopo on either OS — visual topology with caches
+if command -v lstopo >/dev/null 2>&1; then
+  log "topology.svg ← lstopo"
+  lstopo --of svg "$OUT/topology.svg" 2>/dev/null || true
+  log "topology.txt ← lstopo --of console"
+  lstopo --of console > "$OUT/topology.txt" 2>/dev/null || true
+else
+  echo "(skipped: hwloc/lstopo not installed)" > "$OUT/topology.txt"
+fi
+
+log "done → $OUT"
+ls -la "$OUT"
