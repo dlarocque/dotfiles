@@ -16,9 +16,9 @@ Plug 'dense-analysis/ale'
 " Languages
 Plug 'fatih/vim-go'
 
-" Color Schemes
-Plug 'lifepillar/vim-solarized8'           " canonical solarized for vim + nvim
-" Kept around as alternates:
+" No colorscheme plugin — using nvim's built-in habamax (neutral dark).
+" Alternates kept here for quick re-enable:
+" Plug 'lifepillar/vim-solarized8'
 " Plug 'dlarocque/balance'
 " Plug 'craftzdog/solarized-osaka.nvim'
 " Plug 'nordtheme/vim'
@@ -47,19 +47,7 @@ endif
 
 syntax on
 set background=dark
-colorscheme solarized8
-
-" Match dlarocque's darker background across editors/terminals
-augroup darken_solarized_bg
-  autocmd!
-  autocmd ColorScheme solarized8 hi Normal       guibg=#00141a ctermbg=NONE
-  autocmd ColorScheme solarized8 hi NormalNC     guibg=#00141a ctermbg=NONE
-  autocmd ColorScheme solarized8 hi LineNr       guibg=#00141a ctermbg=NONE
-  autocmd ColorScheme solarized8 hi SignColumn   guibg=#00141a ctermbg=NONE
-  autocmd ColorScheme solarized8 hi EndOfBuffer  guibg=#00141a ctermbg=NONE
-augroup END
-" Re-apply now that the autocmd is registered (colorscheme already loaded above)
-doautocmd ColorScheme solarized8
+silent! colorscheme habamax    " built-in neutral dark
 
 " set relativenumber                          " relative line numbers
 " set nu                                      " show the actual line number

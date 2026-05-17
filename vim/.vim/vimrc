@@ -23,11 +23,11 @@ call plug#end()
 
 set termguicolors
 
-let g:airline_theme='solarized'
+let g:airline_theme='minimalist'
 
 syntax on
 set background=dark
-color dlarocque
+silent! colorscheme habamax    " ships with vim 9+; neutral dark
 
 set nu                                      " show the actual line number
 set hidden
