@@ -141,8 +141,12 @@ if command -v nvm >/dev/null 2>&1; then
       elif [ "$nvmrc_version" != "$(nvm version)" ]; then
         nvm use
       fi
-    elif [ "$(nvm version)" != "$(nvm version default)" ]; then
-      nvm use default >/dev/null
+    else
+      local default_version
+      default_version=$(nvm version default)
+      if [ "$default_version" != "N/A" ] && [ "$(nvm version)" != "$default_version" ]; then
+        nvm use default >/dev/null
+      fi
     fi
   }
   add-zsh-hook chpwd load-nvmrc
