@@ -103,9 +103,14 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 export PATH="$HOME/.local/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
-export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+
+case "$OSTYPE" in
+  darwin*)
+    export PATH="/opt/homebrew/bin:$PATH"
+    export PATH="/opt/homebrew/opt/llvm/bin:$PATH"
+    ;;
+esac
 
 alias ls="ls --color=always"
 alias ll="ls -la --color=always"
@@ -113,6 +118,8 @@ alias c="clear"
 alias ..="cd .."
 alias ...="cd ../.."
 alias ....="cd ../../.."
+
+alias vi="nvim"
 
 alias gs="git status --short"
 alias gl="git log"
@@ -127,5 +134,7 @@ alias gdw="git diff --word-diff"
 alias gw="git whatchanged"
 alias gpo="git push origin"
 
-source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+[ -f ~/.zshrc.local ] && source ~/.zshrc.local
 

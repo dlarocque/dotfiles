@@ -1,0 +1,5 @@
+[credential]
+    helper = store
+    helper =
+    helper = ~/tools/gcm/git-credential-manager-core
+    credentialStore = cache

@@ -9,4 +9,6 @@
 [credential "https://dev.azure.com"]
     useHttpPath = true
 [include]
+    path = ~/.gitconfig.os
+[include]
     path = ~/.gitconfig.local
