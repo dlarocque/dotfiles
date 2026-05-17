@@ -1,6 +1,8 @@
 font-family = "DejaVuSansM Nerd Font Mono"
 font-size = 16
 
-# No theme — use ghostty's built-in default dark.
+# Pure black background; everything else (foreground, palette) inherits
+# ghostty's defaults. Bump to #0a0a0a or #111111 if pure black feels harsh.
+background = #000000
 # Browse alternatives with: ghostty +list-themes
-# Switch to a theme later with: theme = <name>
+# Switch to a theme later with: theme = <name>  (will override `background`)

@@ -47,7 +47,21 @@ endif
 
 syntax on
 set background=dark
-silent! colorscheme habamax    " built-in neutral dark
+" No colorscheme — let the terminal background show through.
+augroup transparent_bg
+  autocmd!
+  autocmd ColorScheme * hi Normal       guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi NormalNC     guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi NormalFloat  guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi SignColumn   guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi LineNr       guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi EndOfBuffer  guibg=NONE ctermbg=NONE
+augroup END
+hi Normal       guibg=NONE ctermbg=NONE
+hi NormalFloat  guibg=NONE ctermbg=NONE
+hi SignColumn   guibg=NONE ctermbg=NONE
+hi LineNr       guibg=NONE ctermbg=NONE
+hi EndOfBuffer  guibg=NONE ctermbg=NONE
 
 " set relativenumber                          " relative line numbers
 " set nu                                      " show the actual line number

@@ -27,7 +27,20 @@ let g:airline_theme='minimalist'
 
 syntax on
 set background=dark
-silent! colorscheme habamax    " ships with vim 9+; neutral dark
+" No colorscheme — let the terminal background show through.
+" The ColorScheme autocmd makes this stick if a scheme is loaded later.
+augroup transparent_bg
+  autocmd!
+  autocmd ColorScheme * hi Normal      guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi NormalNC    guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi SignColumn  guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi LineNr      guibg=NONE ctermbg=NONE
+  autocmd ColorScheme * hi EndOfBuffer guibg=NONE ctermbg=NONE
+augroup END
+hi Normal      guibg=NONE ctermbg=NONE
+hi SignColumn  guibg=NONE ctermbg=NONE
+hi LineNr      guibg=NONE ctermbg=NONE
+hi EndOfBuffer guibg=NONE ctermbg=NONE
 
 set nu                                      " show the actual line number
 set hidden

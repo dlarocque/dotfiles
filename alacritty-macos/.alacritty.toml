@@ -1,6 +1,8 @@
 live_config_reload = true
 
-# No [colors] block — alacritty falls back to its built-in defaults.
+# Pure black background; foreground stays at alacritty's built-in default.
+[colors.primary]
+background = "#000000"
 
 [env]
 TERM = "xterm-256color"
