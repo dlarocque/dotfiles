@@ -24,7 +24,20 @@ Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
 
 " Activate gitsigns (lua plugin needs a setup call)
-lua require('gitsigns').setup()
+lua << EOF
+require('gitsigns').setup({
+  signs = {
+    add          = { text = '▎' },
+    change       = { text = '▎' },
+    delete       = { text = '▎' },
+    topdelete    = { text = '▔' },
+    changedelete = { text = '▎' },
+    untracked    = { text = '▎' },
+  },
+  signcolumn = true,
+  numhl = false,
+})
+EOF
 
 syntax on
 set background=dark
@@ -51,7 +64,7 @@ set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=auto                         " gutter shown when something puts a sign there
+set signcolumn=yes                          " always reserve gutter — prevents text shift
 set updatetime=300                          " faster signify/ALE refresh
 " set guicursor=n-v-c:block-Cursor
 " set guicursor+=i:ver100-iCursor
@@ -164,6 +177,9 @@ let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 nmap <silent> [g <Plug>(ale_previous_wrap)
 nmap <silent> ]g <Plug>(ale_next_wrap)
 nnoremap <leader>ad :ALEDetail<CR>
+let g:ale_sign_error   = '●'
+let g:ale_sign_warning = '○'
+let g:ale_sign_info    = '•'
 
 " ── gutentags: ctags for jump-to-definition ──────────────────────────
 let g:gutentags_cache_dir = expand('~/.cache/nvim/gutentags')

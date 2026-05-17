@@ -21,12 +21,12 @@ Plug 'vim-airline/vim-airline-themes'
 Plug 'lifepillar/vim-solarized8'
 call plug#end()
 
-set termguicolors
+" set termguicolors
 
 let g:airline_theme='solarized'
 
 syntax on
-color dlarocque
+color default
 set background=dark
 
 set nu                                      " show the actual line number
@@ -47,7 +47,7 @@ set softtabstop=2
 set mouse=a                                 " mouse clicking
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=auto                         " gutter shown when something puts a sign there
+set signcolumn=yes                          " always reserve gutter — prevents text shift
 set updatetime=300                          " faster signify/ALE refresh
 set re=0
 
@@ -157,8 +157,14 @@ let g:gutentags_generate_on_new = 1
 let g:gutentags_generate_on_missing = 1
 let g:gutentags_generate_on_write = 1
 
-" ── signify: VCS gutter signs (defaults are fine; just tighten ASCII) ─
-let g:signify_sign_add               = '+'
-let g:signify_sign_delete            = '_'
-let g:signify_sign_delete_first_line = '‾'
-let g:signify_sign_change            = '~'
+" ── signify: VCS gutter signs ─ vertical bar in every slot, color does the work
+let g:signify_sign_add               = '▎'
+let g:signify_sign_delete            = '▎'
+let g:signify_sign_delete_first_line = '▔'
+let g:signify_sign_change            = '▎'
+let g:signify_sign_show_count        = 0
+
+" ── ALE: same minimalist sign style ──────────────────────────────
+let g:ale_sign_error   = '●'
+let g:ale_sign_warning = '○'
+let g:ale_sign_info    = '•'
