@@ -72,6 +72,22 @@ main() {
 
   command -v stow >/dev/null || { echo "stow not found in PATH" >&2; exit 1; }
 
+  # Unfold legacy single-package symlinks. When the repo had only one
+  # package contributing to ~/.config (just gh/), stow folded it into a
+  # single symlink. With multiple packages contributing now, that fold
+  # has to be broken so stow can manage each child individually.
+  if [ "$dry_run" -eq 0 ] && [ -L "$HOME/.config" ]; then
+    local target
+    target=$(readlink "$HOME/.config")
+    case "$target" in
+      *.dotfiles/*)
+        echo "Unfolding legacy ~/.config symlink -> $target"
+        rm "$HOME/.config"
+        mkdir "$HOME/.config"
+        ;;
+    esac
+  fi
+
   local stow_flags=(-t "$HOME" -R -d "$DOTFILES_DIR")
   [ "$dry_run" -eq 1 ] && stow_flags+=(-n -v)
 
