@@ -1,0 +1,111 @@
+#!/usr/bin/env bash
+# Sensible macOS system defaults. Run on a fresh Mac (or any time you
+# want to re-baseline). Safe to re-run; every line is idempotent.
+#
+# Many changes only take effect after restarting the affected app
+# (Finder, Dock, SystemUIServer). This script kills those at the end.
+#
+# Inspired by Mathias Bynens' .macos; pared down to the bits I actually
+# notice the absence of.
+
+set -euo pipefail
+
+if [[ "$(uname -s)" != "Darwin" ]]; then
+  echo "Not macOS — exiting." >&2
+  exit 0
+fi
+
+# Ask for sudo upfront and keep alive for the run.
+sudo -v
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+log() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
+
+# ── Keyboard ───────────────────────────────────────────────────────────
+log "Faster key repeat"
+defaults write NSGlobalDomain KeyRepeat -int 2          # default 6
+defaults write NSGlobalDomain InitialKeyRepeat -int 15  # default 25
+
+log "Allow key repeat in apps (disable press-and-hold accent picker)"
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+
+log "Disable auto-correct, smart quotes, smart dashes, period substitution"
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# ── Trackpad ───────────────────────────────────────────────────────────
+log "Enable tap-to-click"
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+
+# ── Finder ─────────────────────────────────────────────────────────────
+log "Show hidden files, extensions, path bar, status bar"
+defaults write com.apple.finder AppleShowAllFiles -bool true
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+
+log "Default to list view in Finder; show POSIX path in title"
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+
+log "Disable warning when changing a file extension"
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+log "Search the current folder by default (not the whole machine)"
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"
+
+log "Avoid .DS_Store on network and USB volumes"
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+
+# ── Screenshots ────────────────────────────────────────────────────────
+log "Screenshots: PNG, no drop-shadow, save to ~/Screenshots"
+mkdir -p "${HOME}/Screenshots"
+defaults write com.apple.screencapture location -string "${HOME}/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+
+# ── Dock ───────────────────────────────────────────────────────────────
+log "Dock: auto-hide, no auto-hide delay, faster show/hide"
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.15
+
+log "Dock: hide recent apps section"
+defaults write com.apple.dock show-recents -bool false
+
+log "Mission Control: don't rearrange spaces by recent use"
+defaults write com.apple.dock mru-spaces -bool false
+
+# ── Save / Print dialogs ──────────────────────────────────────────────
+log "Expand save and print dialogs by default"
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
+
+# ── Sound / animations ────────────────────────────────────────────────
+log "Speed up window resize animation"
+defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+
+log "Disable the 'Are you sure you want to open?' prompt for new downloads"
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+# ── Safari ────────────────────────────────────────────────────────────
+log "Safari: enable Develop menu and Web Inspector"
+defaults write com.apple.Safari IncludeDevelopMenu -bool true 2>/dev/null || true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true 2>/dev/null || true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true 2>/dev/null || true
+
+# ── Restart affected apps ─────────────────────────────────────────────
+log "Restarting Finder, Dock, SystemUIServer"
+for app in Finder Dock SystemUIServer; do
+  killall "$app" >/dev/null 2>&1 || true
+done
+
+log "Done. Some changes require a logout or restart to fully apply."

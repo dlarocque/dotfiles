@@ -48,6 +48,7 @@ BREW_FORMULAE=(
   go
   shellcheck      # script linting
   universal-ctags # gutentags backend (jump-to-definition in vim/nvim)
+  btop            # system monitor
 )
 BREW_CASKS=(
   ghostty
@@ -134,6 +135,13 @@ if [ ! -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]; then
   fi
 else
   log "Oh My Zsh already installed"
+fi
+
+# ── VSCode extensions (if `code` CLI on PATH) ──────────────────────────
+if command -v code >/dev/null 2>&1 && [ -f "$DOTFILES_DIR/vscode/extensions.txt" ]; then
+  log "Installing VSCode extensions"
+  grep -vE '^\s*(#|$)' "$DOTFILES_DIR/vscode/extensions.txt" | \
+    xargs -I {} code --install-extension {} --force >/dev/null || true
 fi
 
 # ── Stow everything ────────────────────────────────────────────────────

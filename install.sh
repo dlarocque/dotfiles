@@ -16,7 +16,7 @@ DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 COMMON_PACKAGES=(
   zsh bash git vim nvim tmux fish gh zellij
-  ssh bin starship atuin bat ripgrep python go
+  ssh bin starship atuin bat ripgrep python go btop
 )
 
 pick_packages() {
@@ -102,6 +102,35 @@ main() {
     echo "linked ~/.gitconfig.os -> $OS_GITCONFIG"
   else
     echo "would link ~/.gitconfig.os -> $OS_GITCONFIG"
+  fi
+
+  # VSCode / Cursor settings — path doesn't fit XDG, can't be stowed cleanly.
+  # Symlink directly to whichever apps' user dirs exist.
+  if [ "$dry_run" -eq 0 ]; then
+    case "$env" in
+      macos)
+        for app_dir in \
+          "$HOME/Library/Application Support/Code/User" \
+          "$HOME/Library/Application Support/Cursor/User"; do
+          if [ -d "$(dirname "$app_dir")" ]; then
+            mkdir -p "$app_dir"
+            ln -sfn "$DOTFILES_DIR/vscode/settings.json"    "$app_dir/settings.json"
+            ln -sfn "$DOTFILES_DIR/vscode/keybindings.json" "$app_dir/keybindings.json"
+            echo "linked vscode settings -> $app_dir"
+          fi
+        done
+        ;;
+      linux*)
+        for app_dir in "$HOME/.config/Code/User" "$HOME/.config/Cursor/User"; do
+          if [ -d "$(dirname "$app_dir")" ]; then
+            mkdir -p "$app_dir"
+            ln -sfn "$DOTFILES_DIR/vscode/settings.json"    "$app_dir/settings.json"
+            ln -sfn "$DOTFILES_DIR/vscode/keybindings.json" "$app_dir/keybindings.json"
+            echo "linked vscode settings -> $app_dir"
+          fi
+        done
+        ;;
+    esac
   fi
 }
 

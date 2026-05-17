@@ -1,0 +1,9 @@
+# VSCode extensions — install with:
+#   xargs -L1 code --install-extension < vscode/extensions.txt
+# (bootstrap.sh does this automatically if `code` is on PATH)
+
+vscodevim.vim
+editorconfig.editorconfig
+ryanluker.vscode-coverage-gutters
+streetsidesoftware.code-spell-checker
+tamasfe.even-better-toml
