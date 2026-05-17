@@ -17,10 +17,12 @@ Plug 'dense-analysis/ale'
 Plug 'fatih/vim-go'
 
 " Color Schemes
-Plug 'dlarocque/balance'
-Plug 'craftzdog/solarized-osaka.nvim'
-Plug 'nordtheme/vim'
-Plug 'plan9-for-vimspace/acme-colors'
+Plug 'lifepillar/vim-solarized8'           " canonical solarized for vim + nvim
+" Kept around as alternates:
+" Plug 'dlarocque/balance'
+" Plug 'craftzdog/solarized-osaka.nvim'
+" Plug 'nordtheme/vim'
+" Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
 
 " Activate gitsigns (lua plugin needs a setup call)
@@ -39,9 +41,13 @@ require('gitsigns').setup({
 })
 EOF
 
+if has('termguicolors')
+  set termguicolors
+endif
+
 syntax on
 set background=dark
-colorscheme balance
+colorscheme solarized8
 
 " set relativenumber                          " relative line numbers
 " set nu                                      " show the actual line number

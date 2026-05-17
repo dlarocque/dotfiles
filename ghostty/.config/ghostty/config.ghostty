@@ -1,2 +1,6 @@
 font-family = "DejaVuSansM Nerd Font Mono"
 font-size = 16
+
+# Solarized Dark — ghostty ships this preset.
+# Browse alternatives with:  ghostty +list-themes
+theme = Solarized Dark Patched
