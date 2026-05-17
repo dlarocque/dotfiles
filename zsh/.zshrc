@@ -72,7 +72,19 @@ ZSH_THEME=""
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git vi-mode)
+plugins=(
+  git
+  vi-mode
+  sudo                      # Esc Esc to prepend sudo
+  dirhistory                # alt+arrow to navigate dir history
+  command-not-found         # suggest brew formula for missing cmds
+  safe-paste                # bracketed paste, no accidental run
+  extract                   # `x foo.tar.gz` universal archive extractor
+  # External, cloned by bootstrap.sh into $ZSH/custom/plugins/:
+  fzf-tab                   # Tab opens fzf for the argument (must precede ohmyzsh compinit timing)
+  zsh-autosuggestions       # gray-inline suggestion from history
+  zsh-syntax-highlighting   # MUST be last — instruments command buffer
+)
 
 # vi-mode: snappy mode switching. Default is 40 (= 400ms after Esc),
 # which makes pressing Esc + another key feel laggy.
@@ -80,6 +92,39 @@ export KEYTIMEOUT=1
 
 # Cursor shape changes per mode (vi-mode plugin handles this when set).
 VI_MODE_SET_CURSOR=true
+
+# ── Shell options ────────────────────────────────────────────────────
+setopt AUTO_CD               # type a dir name to cd into it
+setopt EXTENDED_GLOB         # ^, ~, # patterns in globs
+setopt INTERACTIVE_COMMENTS  # # comments in interactive shell
+setopt NO_BEEP               # never beep
+setopt NOTIFY                # report bg job state changes immediately
+setopt LONG_LIST_JOBS        # long format for `jobs`
+
+# ── History (atuin handles search; these are for raw zsh history) ────
+HISTSIZE=50000
+SAVEHIST=50000
+HISTFILE="$HOME/.zsh_history"
+setopt SHARE_HISTORY         # share history across sessions immediately
+setopt HIST_IGNORE_ALL_DUPS  # keep only most recent of duplicate cmds
+setopt HIST_IGNORE_SPACE     # ' cmd' (leading space) doesn't go to history
+setopt HIST_REDUCE_BLANKS    # trim whitespace before writing
+setopt HIST_VERIFY           # `!!` expands but waits for Enter to run
+setopt INC_APPEND_HISTORY    # append as commands run, not at shell exit
+
+# ── Tab completion ───────────────────────────────────────────────────
+# Case-insensitive matching, partial-word completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|=*' 'l:|=* r:|=*'
+# Menu-select with arrow keys
+zstyle ':completion:*' menu select
+# Colors in completion menu (uses LS_COLORS)
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+# Group completions by category with headers
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:descriptions' format '%F{yellow}%d%f'
+# fzf-tab: render the completion menu with fzf, show preview on the right
+zstyle ':fzf-tab:complete:*' fzf-preview 'bat --color=always --style=numbers --line-range=:200 $realpath 2>/dev/null || eza --tree --color=always $realpath 2>/dev/null || ls -la $realpath'
+zstyle ':fzf-tab:*' fzf-flags --height=40% --layout=reverse --border
 
 [ -f "$ZSH/oh-my-zsh.sh" ] && source "$ZSH/oh-my-zsh.sh"
 

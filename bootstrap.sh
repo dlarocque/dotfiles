@@ -151,6 +151,20 @@ else
   log "Oh My Zsh already installed"
 fi
 
+# ── External zsh plugins (cloned into omz custom dir) ─────────────────
+ZSH_CUSTOM="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}"
+for repo in \
+    "zsh-users/zsh-autosuggestions" \
+    "zsh-users/zsh-syntax-highlighting" \
+    "Aloxaf/fzf-tab"; do
+  name="$(basename "$repo")"
+  dest="$ZSH_CUSTOM/plugins/$name"
+  if [ ! -d "$dest" ]; then
+    log "Cloning zsh plugin: $name"
+    git clone --depth=1 "https://github.com/$repo" "$dest"
+  fi
+done
+
 # ── VSCode extensions (if `code` CLI on PATH) ──────────────────────────
 if command -v code >/dev/null 2>&1 && [ -f "$DOTFILES_DIR/vscode/extensions.txt" ]; then
   log "Installing VSCode extensions"
