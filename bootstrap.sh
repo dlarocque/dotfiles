@@ -47,6 +47,7 @@ BREW_FORMULAE=(
   python          # for pythonrc
   go
   shellcheck      # script linting
+  universal-ctags # gutentags backend (jump-to-definition in vim/nvim)
 )
 BREW_CASKS=(
   ghostty

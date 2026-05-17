@@ -1,9 +1,17 @@
 call plug#begin('~/.config/nvim/plugged')
-" General
-Plug 'lewis6991/gitsigns.nvim'
-" Plug 'vim-airline/vim-airline'             " better status/tabline
+" Search / nav
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
+" Git
+Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'           " gutter signs for VCS changes
+
+" Tags (jump-to-definition without LSP)
+Plug 'ludovicchabant/vim-gutentags'
+
+" Linting (background, on save; uses installed CLI linters)
+Plug 'dense-analysis/ale'
 
 " Languages
 Plug 'fatih/vim-go'
@@ -15,9 +23,11 @@ Plug 'SirVer/ultisnips'
 Plug 'dlarocque/balance'
 Plug 'craftzdog/solarized-osaka.nvim'
 Plug 'nordtheme/vim'
-Plug 'vim-airline/vim-airline-themes'  
 Plug 'plan9-for-vimspace/acme-colors'
 call plug#end()
+
+" Activate gitsigns (lua plugin needs a setup call)
+lua require('gitsigns').setup()
 
 syntax on
 set background=dark
@@ -44,7 +54,8 @@ set clipboard=unnamedplus                   " copy paste from clipboard
 set noswapfile                              " no useless swap files
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=no                          " show the sign column on the lhs
+set signcolumn=auto                         " gutter shown when something puts a sign there
+set updatetime=300                          " faster signify/ALE refresh
 " set guicursor=n-v-c:block-Cursor
 " set guicursor+=i:ver100-iCursor
 " set guicursor+=n-v-c:blinkon0
@@ -59,38 +70,8 @@ let g:netrw_liststyle=3                     " tree view
 let g:netrw_banner=0                        " no stupid banner
 let g:netrw_browse_split=0                  " open new files in a new buffer in the previous window
 
-" nerdcommenter configs
-let g:NERDSpaceDelims=1                     " space between comments and text
-let g:CompactSexyComs=1
-
-" vim-airline
-let g:airline#extensions#tabline#formatter = 'default'
-let g:airline#extensions#tabline#enabled = 1
-" let g:airline_theme="base16_darktooth"
-let g:airline_theme="monochrome"
-
-" vimtex
-let g:tex_flavor='latex'
-let g:vimtex_view_method = 'zathura' " use zathura as pdf viewer
-let g:vimtex_quickfix_mode=0
-hi clear Conceal
-
-" vim tex conceal
-set conceallevel=1
-let g:tex_conceal='abdmg'
-hi Conceal ctermbg=none
-
-" nnoremap <leader>v <plug>(vimtex-view)
-
 " vim-fugitive
 nnoremap <leader>gs :G<CR>                   " git status
-
-
-" vim-easyescape
-let g:easyescape_chars = { "j": 1, "k": 1 }
-let g:easyescape_timeout = 100
-cnoremap jk <ESC>
-cnoremap kj <ESC>
 
 " MAPPINGS
 let mapleader = ' '
@@ -118,18 +99,9 @@ nnoremap <Right> :bn<CR>
 nnoremap <C-H> :%s/
 xnoremap <C-H> :s/
 
-" NERDTree
-" nnoremap <leader>t <CMD>NERDTreeToggle<CR> 
-" let NERDTreeShowHidden=1
-
-" trouble
-nnoremap <leader>e <CMD>TroubleToggle<CR>
-
 " File search
 nnoremap <leader>f :Files<CR>
 nnoremap <leader>g :Rg<CR>
-
-let g:vimtex_view_method = 'zathura'
 
 " Clear highlighting
 if maparg('<C-L>', 'n') ==# ''
@@ -182,3 +154,24 @@ set wildignorecase  " ignore file and dir name cases in cmd-completionf
 
 " MISC
 au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
+
+" ── ALE: lint on save, never on every keystroke ──────────────────────
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_fix_on_save = 0
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+nnoremap <leader>ad :ALEDetail<CR>
+
+" ── gutentags: ctags for jump-to-definition ──────────────────────────
+let g:gutentags_cache_dir = expand('~/.cache/nvim/gutentags')
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git', '.hg', 'package.json', 'Cargo.toml', 'go.mod', 'pyproject.toml']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1

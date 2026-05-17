@@ -5,6 +5,13 @@ Plug 'junegunn/fzf.vim'
 
 " Git
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'                 " gutter signs for VCS changes
+
+" Tags (jump-to-definition without LSP)
+Plug 'ludovicchabant/vim-gutentags'
+
+" Linting (background, on save; uses installed CLI linters)
+Plug 'dense-analysis/ale'
 
 " Tabline
 Plug 'vim-airline/vim-airline'
@@ -12,9 +19,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Themes
 Plug 'lifepillar/vim-solarized8'
-" Plug 'dlarocque/cider.vim'
-" Plug 'chriskempson/base16-vim'
-" Plug 'nordtheme/vim'
 call plug#end()
 
 set termguicolors
@@ -43,7 +47,8 @@ set softtabstop=2
 set mouse=a                                 " mouse clicking
 set scrolloff=8                             " dont go all the way down before scrolling
 " set colorcolumn=80
-set signcolumn=no                          " show the sign column on the lhs
+set signcolumn=auto                         " gutter shown when something puts a sign there
+set updatetime=300                          " faster signify/ALE refresh
 set re=0
 
 if has('mac')
@@ -130,3 +135,30 @@ set wildignore+=*.aux,*.bbl,*.blg,*.brf,*.fls,*.fdb_latexmk,*.synctex.gz,*.xdv
 set wildignorecase  " ignore file and dir name cases in cmd-completion
 
 au BufNewFile,BufRead Jenkinsfile setf groovy " Jenkinsfile syntax highlighting
+
+" ── ALE: lint on save, never on every keystroke ──────────────────────
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_enter = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+let g:ale_fix_on_save = 0                    " explicit fixes only — never auto-rewrite
+let g:ale_set_loclist = 1
+let g:ale_set_quickfix = 0
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
+nmap <silent> [g <Plug>(ale_previous_wrap)
+nmap <silent> ]g <Plug>(ale_next_wrap)
+nnoremap <leader>ad :ALEDetail<CR>
+
+" ── gutentags: ctags for jump-to-definition (lexical, not semantic) ──
+let g:gutentags_cache_dir = expand('~/.cache/vim/gutentags')
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['.git', '.hg', 'package.json', 'Cargo.toml', 'go.mod', 'pyproject.toml']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+
+" ── signify: VCS gutter signs (defaults are fine; just tighten ASCII) ─
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '_'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
